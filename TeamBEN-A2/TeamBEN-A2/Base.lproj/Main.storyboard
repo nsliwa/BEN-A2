@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
-        <!--Main-->
+        <!--Home-->
         <scene sceneID="maF-Yn-JuK">
             <objects>
                 <tableViewController id="mPX-KS-4uh" customClass="RootTableViewController" sceneMemberID="viewController">
@@ -13,7 +13,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell_ModuleA" textLabel="XH8-24-pDj" detailTextLabel="a07-Jb-2XH" style="IBUITableViewCellStyleValue1" id="vhZ-u3-7ij">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell_ModuleA" textLabel="XH8-24-pDj" detailTextLabel="a07-Jb-2XH" style="IBUITableViewCellStyleValue1" id="vhZ-u3-7ij">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vhZ-u3-7ij" id="HmT-Eg-aG1">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -33,7 +33,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell_ModuleB" textLabel="pim-ol-wpb" detailTextLabel="KiG-Z7-QDR" style="IBUITableViewCellStyleValue1" id="9T0-ng-kyH">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell_ModuleB" textLabel="pim-ol-wpb" detailTextLabel="KiG-Z7-QDR" style="IBUITableViewCellStyleValue1" id="9T0-ng-kyH">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9T0-ng-kyH" id="HKq-4I-iHo">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -59,7 +59,7 @@
                             <outlet property="delegate" destination="mPX-KS-4uh" id="ymI-4z-D2u"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Main" id="1GZ-bg-ReB"/>
+                    <navigationItem key="navigationItem" title="Home" id="1GZ-bg-ReB"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g6h-5E-Fuf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

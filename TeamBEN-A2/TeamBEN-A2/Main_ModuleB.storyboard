@@ -4,26 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
-        <scene sceneID="DeN-Y5-PKM">
-            <objects>
-                <navigationController id="0nK-SM-N8e" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="C7h-DC-uZO">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="mfk-aI-If1" kind="show" id="sXX-rh-omB"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gOt-wy-JnR" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-125" y="282"/>
-        </scene>
         <!--ModuleB MasterV Iew Controller View Controller-->
         <scene sceneID="Vxh-vD-37Y">
             <objects>
-                <viewController id="mfk-aI-If1" customClass="ModuleB_MasterVIewControllerViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ModuleB_MasterViewController" id="mfk-aI-If1" customClass="ModuleB_MasterVIewControllerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="T5o-Pw-zIr"/>
                         <viewControllerLayoutGuide type="bottom" id="2mC-qV-z2F"/>

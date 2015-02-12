@@ -70,11 +70,14 @@
         NSLog(@"row 0 selected");
         storyBoard = [UIStoryboard storyboardWithName:@"Main_ModuleA" bundle:nil];
         NSLog(@"found storyboard a");
-        controller = [storyBoard instantiateViewControllerWithIdentifier:@"ModuleA_MasterViewController"];
+        controller = [storyBoard instantiateViewControllerWithIdentifier:
+                      //@"ModuleA_NavigationController"];
+                      @"ModuleA_MasterViewController"];
         NSLog(@"ModuleA_MasterViewController");
         
         //[controller setModalPresentationStyle:UIModalPresentationFullScreen];
-        [self presentViewController:controller animated:YES completion:nil];
+        [self.navigationController pushViewController:controller animated:YES];
+        //[self presentViewController:controller animated:YES completion:nil];
         NSLog(@"presented view");
     }
     
@@ -82,11 +85,14 @@
         NSLog(@"row 1 selected");
         storyBoard = [UIStoryboard storyboardWithName:@"Main_ModuleB" bundle:nil];
         NSLog(@"found storyboard b");
-        controller = [storyBoard instantiateViewControllerWithIdentifier:@"ModuleB_MasterViewController"];
+        controller = [storyBoard instantiateViewControllerWithIdentifier:
+                    //@"ModuleB_NavigationController"];
+                    @"ModuleB_MasterViewController"];
         NSLog(@"ModuleB_MasterViewController");
         
+        [self.navigationController pushViewController:controller animated:YES];
         //[controller setModalPresentationStyle:UIModalPresentationFullScreen];
-        [self presentViewController:controller animated:YES completion:nil];
+        //[self presentViewController:controller animated:YES completion:nil];
         NSLog(@"presented view");
     }
 }

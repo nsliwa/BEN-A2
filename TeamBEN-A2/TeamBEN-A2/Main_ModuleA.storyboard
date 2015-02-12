@@ -17,26 +17,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="f0Y-lo-kMJ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sGb-SO-6fb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="598" y="853"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Utd-9S-n4z">
-            <objects>
-                <navigationController id="q52-05-7yw" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gek-iV-BGC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="3vP-vP-ZG6" kind="show" id="9Tj-a0-EkO"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Uar-AM-A3m" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-154" y="902"/>
+            <point key="canvasLocation" x="598" y="902"/>
         </scene>
     </scenes>
 </document>
