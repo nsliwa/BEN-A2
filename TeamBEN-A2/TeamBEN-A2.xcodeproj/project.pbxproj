@@ -17,7 +17,11 @@
 		ADB724C81A8C25E800EBCB0C /* AudioFileWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB724C41A8C25E800EBCB0C /* AudioFileWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		ADB724C91A8C25E800EBCB0C /* Novocaine.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB724C61A8C25E800EBCB0C /* Novocaine.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		ADB724CC1A8C25F300EBCB0C /* RingBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = ADB724CB1A8C25F300EBCB0C /* RingBuffer.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		ADB724D41A8C285A00EBCB0C /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB724D31A8C285A00EBCB0C /* RootViewController.m */; };
+		ADB724D61A8C328300EBCB0C /* Main_ModuleA.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADB724D51A8C328300EBCB0C /* Main_ModuleA.storyboard */; };
+		ADB724D91A8C32B900EBCB0C /* RootTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB724D81A8C32B900EBCB0C /* RootTableViewController.m */; };
+		ADB724DE1A8C3CC200EBCB0C /* Main_ModuleB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADB724DD1A8C3CC200EBCB0C /* Main_ModuleB.storyboard */; };
+		ADB724E11A8C3CE400EBCB0C /* ModuleB_MasterVIewControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB724E01A8C3CE400EBCB0C /* ModuleB_MasterVIewControllerViewController.m */; };
+		ADB724E41A8C44FE00EBCB0C /* ModuleA_MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB724E31A8C44FE00EBCB0C /* ModuleA_MasterViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,8 +56,14 @@
 		ADB724CB1A8C25F300EBCB0C /* RingBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RingBuffer.mm; sourceTree = "<group>"; };
 		ADB724CE1A8C263E00EBCB0C /* SMUFFTHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMUFFTHelper.h; sourceTree = "<group>"; };
 		ADB724CF1A8C263E00EBCB0C /* SMUGraphHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMUGraphHelper.h; sourceTree = "<group>"; };
-		ADB724D21A8C285A00EBCB0C /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
-		ADB724D31A8C285A00EBCB0C /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		ADB724D51A8C328300EBCB0C /* Main_ModuleA.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_ModuleA.storyboard; sourceTree = "<group>"; };
+		ADB724D71A8C32B900EBCB0C /* RootTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootTableViewController.h; sourceTree = "<group>"; };
+		ADB724D81A8C32B900EBCB0C /* RootTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootTableViewController.m; sourceTree = "<group>"; };
+		ADB724DD1A8C3CC200EBCB0C /* Main_ModuleB.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_ModuleB.storyboard; sourceTree = "<group>"; };
+		ADB724DF1A8C3CE400EBCB0C /* ModuleB_MasterVIewControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleB_MasterVIewControllerViewController.h; sourceTree = "<group>"; };
+		ADB724E01A8C3CE400EBCB0C /* ModuleB_MasterVIewControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleB_MasterVIewControllerViewController.m; sourceTree = "<group>"; };
+		ADB724E21A8C44FE00EBCB0C /* ModuleA_MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleA_MasterViewController.h; sourceTree = "<group>"; };
+		ADB724E31A8C44FE00EBCB0C /* ModuleA_MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleA_MasterViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,8 +109,8 @@
 				ADB7249E1A8C20F200EBCB0C /* Main.storyboard */,
 				ADB724981A8C20F200EBCB0C /* AppDelegate.h */,
 				ADB724991A8C20F200EBCB0C /* AppDelegate.m */,
-				ADB724D21A8C285A00EBCB0C /* RootViewController.h */,
-				ADB724D31A8C285A00EBCB0C /* RootViewController.m */,
+				ADB724D71A8C32B900EBCB0C /* RootTableViewController.h */,
+				ADB724D81A8C32B900EBCB0C /* RootTableViewController.m */,
 				ADB724D01A8C277B00EBCB0C /* ModuleA */,
 				ADB724D11A8C278500EBCB0C /* ModuleB */,
 				ADB724CD1A8C262100EBCB0C /* FFT/Graphing */,
@@ -164,6 +174,9 @@
 		ADB724D01A8C277B00EBCB0C /* ModuleA */ = {
 			isa = PBXGroup;
 			children = (
+				ADB724D51A8C328300EBCB0C /* Main_ModuleA.storyboard */,
+				ADB724E21A8C44FE00EBCB0C /* ModuleA_MasterViewController.h */,
+				ADB724E31A8C44FE00EBCB0C /* ModuleA_MasterViewController.m */,
 			);
 			name = ModuleA;
 			sourceTree = "<group>";
@@ -171,6 +184,9 @@
 		ADB724D11A8C278500EBCB0C /* ModuleB */ = {
 			isa = PBXGroup;
 			children = (
+				ADB724DD1A8C3CC200EBCB0C /* Main_ModuleB.storyboard */,
+				ADB724DF1A8C3CE400EBCB0C /* ModuleB_MasterVIewControllerViewController.h */,
+				ADB724E01A8C3CE400EBCB0C /* ModuleB_MasterVIewControllerViewController.m */,
 			);
 			name = ModuleB;
 			sourceTree = "<group>";
@@ -256,7 +272,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADB724A01A8C20F200EBCB0C /* Main.storyboard in Resources */,
+				ADB724D61A8C328300EBCB0C /* Main_ModuleA.storyboard in Resources */,
 				ADB724A51A8C20F200EBCB0C /* LaunchScreen.xib in Resources */,
+				ADB724DE1A8C3CC200EBCB0C /* Main_ModuleB.storyboard in Resources */,
 				ADB724A21A8C20F200EBCB0C /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,12 +294,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADB724C71A8C25E800EBCB0C /* AudioFileReader.mm in Sources */,
-				ADB724D41A8C285A00EBCB0C /* RootViewController.m in Sources */,
+				ADB724E11A8C3CE400EBCB0C /* ModuleB_MasterVIewControllerViewController.m in Sources */,
 				ADB7249A1A8C20F200EBCB0C /* AppDelegate.m in Sources */,
 				ADB724971A8C20F200EBCB0C /* main.m in Sources */,
 				ADB724CC1A8C25F300EBCB0C /* RingBuffer.mm in Sources */,
 				ADB724C81A8C25E800EBCB0C /* AudioFileWriter.m in Sources */,
 				ADB724C91A8C25E800EBCB0C /* Novocaine.m in Sources */,
+				ADB724E41A8C44FE00EBCB0C /* ModuleA_MasterViewController.m in Sources */,
+				ADB724D91A8C32B900EBCB0C /* RootTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,6 +494,7 @@
 				ADB724B61A8C20F200EBCB0C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		ADB724B71A8C20F200EBCB0C /* Build configuration list for PBXNativeTarget "TeamBEN-A2Tests" */ = {
 			isa = XCConfigurationList;
@@ -482,6 +503,7 @@
 				ADB724B91A8C20F200EBCB0C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

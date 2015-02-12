@@ -1,5 +1,5 @@
 //
-//  RootViewController.h
+//  ModuleA_MasterViewController.h
 //  TeamBEN-A2
 //
 //  Created by Nicole Sliwa on 2/11/15.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RootViewController : UITableViewController
+@interface ModuleA_MasterViewController : UIViewController
 
 @end

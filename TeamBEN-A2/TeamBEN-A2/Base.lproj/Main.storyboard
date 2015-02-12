@@ -7,7 +7,7 @@
         <!--Main-->
         <scene sceneID="maF-Yn-JuK">
             <objects>
-                <tableViewController id="mPX-KS-4uh" customClass="RootViewController" sceneMemberID="viewController">
+                <tableViewController id="mPX-KS-4uh" customClass="RootTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ENT-xm-FP5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -63,7 +63,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g6h-5E-Fuf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="486.93333333333334" y="904.06666666666661"/>
+            <point key="canvasLocation" x="482" y="903"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="oAi-bo-7gI">
