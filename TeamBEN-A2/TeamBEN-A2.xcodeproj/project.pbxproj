@@ -9,11 +9,15 @@
 /* Begin PBXBuildFile section */
 		ADB724971A8C20F200EBCB0C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB724961A8C20F200EBCB0C /* main.m */; };
 		ADB7249A1A8C20F200EBCB0C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB724991A8C20F200EBCB0C /* AppDelegate.m */; };
-		ADB7249D1A8C20F200EBCB0C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB7249C1A8C20F200EBCB0C /* ViewController.m */; };
 		ADB724A01A8C20F200EBCB0C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADB7249E1A8C20F200EBCB0C /* Main.storyboard */; };
 		ADB724A21A8C20F200EBCB0C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADB724A11A8C20F200EBCB0C /* Images.xcassets */; };
 		ADB724A51A8C20F200EBCB0C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADB724A31A8C20F200EBCB0C /* LaunchScreen.xib */; };
 		ADB724B11A8C20F200EBCB0C /* TeamBEN_A2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB724B01A8C20F200EBCB0C /* TeamBEN_A2Tests.m */; };
+		ADB724C71A8C25E800EBCB0C /* AudioFileReader.mm in Sources */ = {isa = PBXBuildFile; fileRef = ADB724C21A8C25E800EBCB0C /* AudioFileReader.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		ADB724C81A8C25E800EBCB0C /* AudioFileWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB724C41A8C25E800EBCB0C /* AudioFileWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		ADB724C91A8C25E800EBCB0C /* Novocaine.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB724C61A8C25E800EBCB0C /* Novocaine.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		ADB724CC1A8C25F300EBCB0C /* RingBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = ADB724CB1A8C25F300EBCB0C /* RingBuffer.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		ADB724D41A8C285A00EBCB0C /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB724D31A8C285A00EBCB0C /* RootViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,14 +36,24 @@
 		ADB724961A8C20F200EBCB0C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		ADB724981A8C20F200EBCB0C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		ADB724991A8C20F200EBCB0C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		ADB7249B1A8C20F200EBCB0C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		ADB7249C1A8C20F200EBCB0C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		ADB7249F1A8C20F200EBCB0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ADB724A11A8C20F200EBCB0C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		ADB724A41A8C20F200EBCB0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		ADB724AA1A8C20F200EBCB0C /* TeamBEN-A2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TeamBEN-A2Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADB724AF1A8C20F200EBCB0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADB724B01A8C20F200EBCB0C /* TeamBEN_A2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeamBEN_A2Tests.m; sourceTree = "<group>"; };
+		ADB724C11A8C25E800EBCB0C /* AudioFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFileReader.h; sourceTree = "<group>"; };
+		ADB724C21A8C25E800EBCB0C /* AudioFileReader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioFileReader.mm; sourceTree = "<group>"; };
+		ADB724C31A8C25E800EBCB0C /* AudioFileWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFileWriter.h; sourceTree = "<group>"; };
+		ADB724C41A8C25E800EBCB0C /* AudioFileWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioFileWriter.m; sourceTree = "<group>"; };
+		ADB724C51A8C25E800EBCB0C /* Novocaine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Novocaine.h; sourceTree = "<group>"; };
+		ADB724C61A8C25E800EBCB0C /* Novocaine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Novocaine.m; sourceTree = "<group>"; };
+		ADB724CA1A8C25F300EBCB0C /* RingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RingBuffer.h; sourceTree = "<group>"; };
+		ADB724CB1A8C25F300EBCB0C /* RingBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RingBuffer.mm; sourceTree = "<group>"; };
+		ADB724CE1A8C263E00EBCB0C /* SMUFFTHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMUFFTHelper.h; sourceTree = "<group>"; };
+		ADB724CF1A8C263E00EBCB0C /* SMUGraphHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMUGraphHelper.h; sourceTree = "<group>"; };
+		ADB724D21A8C285A00EBCB0C /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		ADB724D31A8C285A00EBCB0C /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,13 +95,17 @@
 		ADB724931A8C20F200EBCB0C /* TeamBEN-A2 */ = {
 			isa = PBXGroup;
 			children = (
+				ADB724A31A8C20F200EBCB0C /* LaunchScreen.xib */,
+				ADB7249E1A8C20F200EBCB0C /* Main.storyboard */,
 				ADB724981A8C20F200EBCB0C /* AppDelegate.h */,
 				ADB724991A8C20F200EBCB0C /* AppDelegate.m */,
-				ADB7249B1A8C20F200EBCB0C /* ViewController.h */,
-				ADB7249C1A8C20F200EBCB0C /* ViewController.m */,
-				ADB7249E1A8C20F200EBCB0C /* Main.storyboard */,
+				ADB724D21A8C285A00EBCB0C /* RootViewController.h */,
+				ADB724D31A8C285A00EBCB0C /* RootViewController.m */,
+				ADB724D01A8C277B00EBCB0C /* ModuleA */,
+				ADB724D11A8C278500EBCB0C /* ModuleB */,
+				ADB724CD1A8C262100EBCB0C /* FFT/Graphing */,
+				ADB724BA1A8C252800EBCB0C /* Novocaine */,
 				ADB724A11A8C20F200EBCB0C /* Images.xcassets */,
-				ADB724A31A8C20F200EBCB0C /* LaunchScreen.xib */,
 				ADB724941A8C20F200EBCB0C /* Supporting Files */,
 			);
 			path = "TeamBEN-A2";
@@ -117,6 +135,44 @@
 				ADB724AF1A8C20F200EBCB0C /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		ADB724BA1A8C252800EBCB0C /* Novocaine */ = {
+			isa = PBXGroup;
+			children = (
+				ADB724C11A8C25E800EBCB0C /* AudioFileReader.h */,
+				ADB724C21A8C25E800EBCB0C /* AudioFileReader.mm */,
+				ADB724C31A8C25E800EBCB0C /* AudioFileWriter.h */,
+				ADB724C41A8C25E800EBCB0C /* AudioFileWriter.m */,
+				ADB724C51A8C25E800EBCB0C /* Novocaine.h */,
+				ADB724C61A8C25E800EBCB0C /* Novocaine.m */,
+				ADB724CA1A8C25F300EBCB0C /* RingBuffer.h */,
+				ADB724CB1A8C25F300EBCB0C /* RingBuffer.mm */,
+			);
+			name = Novocaine;
+			sourceTree = "<group>";
+		};
+		ADB724CD1A8C262100EBCB0C /* FFT/Graphing */ = {
+			isa = PBXGroup;
+			children = (
+				ADB724CE1A8C263E00EBCB0C /* SMUFFTHelper.h */,
+				ADB724CF1A8C263E00EBCB0C /* SMUGraphHelper.h */,
+			);
+			name = FFT/Graphing;
+			sourceTree = "<group>";
+		};
+		ADB724D01A8C277B00EBCB0C /* ModuleA */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ModuleA;
+			sourceTree = "<group>";
+		};
+		ADB724D11A8C278500EBCB0C /* ModuleB */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ModuleB;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,9 +275,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADB7249D1A8C20F200EBCB0C /* ViewController.m in Sources */,
+				ADB724C71A8C25E800EBCB0C /* AudioFileReader.mm in Sources */,
+				ADB724D41A8C285A00EBCB0C /* RootViewController.m in Sources */,
 				ADB7249A1A8C20F200EBCB0C /* AppDelegate.m in Sources */,
 				ADB724971A8C20F200EBCB0C /* main.m in Sources */,
+				ADB724CC1A8C25F300EBCB0C /* RingBuffer.mm in Sources */,
+				ADB724C81A8C25E800EBCB0C /* AudioFileWriter.m in Sources */,
+				ADB724C91A8C25E800EBCB0C /* Novocaine.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
