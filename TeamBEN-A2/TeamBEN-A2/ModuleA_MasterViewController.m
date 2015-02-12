@@ -19,9 +19,25 @@
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)onFrequencyClick:(id)sender {
+    
+}
+
+- (IBAction)onToneClick:(id)sender {
+    UIStoryboard* storyBoard;
+    UIViewController* controller;
+    
+    storyBoard = [UIStoryboard storyboardWithName:@"Piano" bundle:nil];
+    NSLog(@"found storyboard piano");
+    controller = [storyBoard instantiateViewControllerWithIdentifier:
+                  //@"ModuleB_NavigationController"];
+                  @"ModuleA_PianoToneController"];
+    NSLog(@"ModuleA_PianoToneController");
+    
+    [self.navigationController pushViewController:controller animated:YES];
+
+    
+    
 }
 
 /*

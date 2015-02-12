@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <scenes>
+        <!--ModuleA Piano Tone Controller-->
+        <scene sceneID="vjf-or-vBU">
+            <objects>
+                <viewController storyboardIdentifier="ModuleA_PianoToneController" id="Ahd-ms-951" customClass="ModuleA_PianoToneController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="05W-pm-oaE"/>
+                        <viewControllerLayoutGuide type="bottom" id="FwT-N5-Uju"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9mk-0H-0TV">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jej-9y-kkn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="344" y="343"/>
+        </scene>
+    </scenes>
+</document>

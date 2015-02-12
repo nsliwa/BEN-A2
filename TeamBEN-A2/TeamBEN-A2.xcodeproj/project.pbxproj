@@ -22,6 +22,8 @@
 		ADB724DE1A8C3CC200EBCB0C /* Main_ModuleB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADB724DD1A8C3CC200EBCB0C /* Main_ModuleB.storyboard */; };
 		ADB724E11A8C3CE400EBCB0C /* ModuleB_MasterVIewControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB724E01A8C3CE400EBCB0C /* ModuleB_MasterVIewControllerViewController.m */; };
 		ADB724E41A8C44FE00EBCB0C /* ModuleA_MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB724E31A8C44FE00EBCB0C /* ModuleA_MasterViewController.m */; };
+		ADB724E71A8C631100EBCB0C /* Piano.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADB724E61A8C631100EBCB0C /* Piano.storyboard */; };
+		ADB724EA1A8C656000EBCB0C /* ModuleA_PianoToneController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB724E91A8C656000EBCB0C /* ModuleA_PianoToneController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +66,9 @@
 		ADB724E01A8C3CE400EBCB0C /* ModuleB_MasterVIewControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleB_MasterVIewControllerViewController.m; sourceTree = "<group>"; };
 		ADB724E21A8C44FE00EBCB0C /* ModuleA_MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleA_MasterViewController.h; sourceTree = "<group>"; };
 		ADB724E31A8C44FE00EBCB0C /* ModuleA_MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleA_MasterViewController.m; sourceTree = "<group>"; };
+		ADB724E61A8C631100EBCB0C /* Piano.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Piano.storyboard; sourceTree = "<group>"; };
+		ADB724E81A8C656000EBCB0C /* ModuleA_PianoToneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleA_PianoToneController.h; sourceTree = "<group>"; };
+		ADB724E91A8C656000EBCB0C /* ModuleA_PianoToneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleA_PianoToneController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,8 +180,11 @@
 			isa = PBXGroup;
 			children = (
 				ADB724D51A8C328300EBCB0C /* Main_ModuleA.storyboard */,
+				ADB724E61A8C631100EBCB0C /* Piano.storyboard */,
 				ADB724E21A8C44FE00EBCB0C /* ModuleA_MasterViewController.h */,
 				ADB724E31A8C44FE00EBCB0C /* ModuleA_MasterViewController.m */,
+				ADB724E81A8C656000EBCB0C /* ModuleA_PianoToneController.h */,
+				ADB724E91A8C656000EBCB0C /* ModuleA_PianoToneController.m */,
 			);
 			name = ModuleA;
 			sourceTree = "<group>";
@@ -273,6 +281,7 @@
 			files = (
 				ADB724A01A8C20F200EBCB0C /* Main.storyboard in Resources */,
 				ADB724D61A8C328300EBCB0C /* Main_ModuleA.storyboard in Resources */,
+				ADB724E71A8C631100EBCB0C /* Piano.storyboard in Resources */,
 				ADB724A51A8C20F200EBCB0C /* LaunchScreen.xib in Resources */,
 				ADB724DE1A8C3CC200EBCB0C /* Main_ModuleB.storyboard in Resources */,
 				ADB724A21A8C20F200EBCB0C /* Images.xcassets in Resources */,
@@ -298,6 +307,7 @@
 				ADB7249A1A8C20F200EBCB0C /* AppDelegate.m in Sources */,
 				ADB724971A8C20F200EBCB0C /* main.m in Sources */,
 				ADB724CC1A8C25F300EBCB0C /* RingBuffer.mm in Sources */,
+				ADB724EA1A8C656000EBCB0C /* ModuleA_PianoToneController.m in Sources */,
 				ADB724C81A8C25E800EBCB0C /* AudioFileWriter.m in Sources */,
 				ADB724C91A8C25E800EBCB0C /* Novocaine.m in Sources */,
 				ADB724E41A8C44FE00EBCB0C /* ModuleA_MasterViewController.m in Sources */,
