@@ -12,6 +12,8 @@
 	<dict>
 		<key>E547B7C040358ECB01A9C5B65BADFFE4D7ECED11</key>
 		<string>https://github.com/nsliwa/BEN-A2.git</string>
+		<key>FBCE4E0067C6230C0ECAD7E9C1CF5398595B458E</key>
+		<string>https://github.com/nsliwa/BEN-T2.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>TeamBEN-A2/TeamBEN-A2.xcodeproj</string>
@@ -19,6 +21,8 @@
 	<dict>
 		<key>E547B7C040358ECB01A9C5B65BADFFE4D7ECED11</key>
 		<string>../../..</string>
+		<key>FBCE4E0067C6230C0ECAD7E9C1CF5398595B458E</key>
+		<string>../../../../BEN-T2</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/nsliwa/BEN-A2.git</string>
@@ -28,6 +32,14 @@
 	<string>E547B7C040358ECB01A9C5B65BADFFE4D7ECED11</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>FBCE4E0067C6230C0ECAD7E9C1CF5398595B458E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>BEN-T2</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
