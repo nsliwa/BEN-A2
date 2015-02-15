@@ -14,9 +14,12 @@
 #import "SMUFFTHelper.h"
 #import "SMUGraphHelper.h"
 
-#define kBufferLength 4096
+#define kBufferLength 14700 //4096
 #define kframesPerSecond 30
 #define knumDataArraysToGraph 1
+#define kWindowLength 50
+#define kNumOfMaximums 2
+#define kdf 44100/kBufferLength
 
 @interface FrequenciesViewController ()
 
@@ -117,13 +120,13 @@ RingBuffer *ringBuffer;
 
 -(float*) dilationLocalMaxFrequency {
     if(!_dilationLocalMaxFrequency)
-        _dilationLocalMaxFrequency = (float *)calloc(50,sizeof(float));
+        _dilationLocalMaxFrequency = (float *)calloc(kWindowLength,sizeof(float));
     return _dilationLocalMaxFrequency;
 }
 
 -(float*) localMaximums {
     if(!_localMaximums)
-        _localMaximums = (float *)calloc(2, sizeof(float));
+        _localMaximums = (float *)calloc(kNumOfMaximums, sizeof(float));
     return _localMaximums;
 }
 
@@ -212,6 +215,7 @@ RingBuffer *ringBuffer;
     self.fftHelper->forward(0,self.audioData, self.fftMagnitudeBuffer3, self.fftPhaseBuffer3);
     [self removeVarianceInMagnitude];
     [self convertToDecibels];
+    [self findMaxUsingDilation];
     
     // plot the FFT
     self.graphHelper->setGraphData(0,self.fftMagnitudeBufferAvg,kBufferLength/8,sqrt(kBufferLength)); // set graph channel
@@ -238,12 +242,45 @@ RingBuffer *ringBuffer;
 -(void)convertToDecibels{
     
     for(int i = 0; i < kBufferLength/2; i++){
-        self.fftMagnitudeBufferAvg[i] = 20 * log10f(abs(self.fftMagnitudeBufferAvg[i]));
+        if(self.fftMagnitudeBufferAvg[i] > 1)
+            self.fftMagnitudeBufferAvg[i] = 20 * log10f(abs(self.fftMagnitudeBufferAvg[i]));
     }
     
 }
 
 -(void)findMaxUsingDilation{
+    
+    float max = 0.0;
+    int maxIndex = 0;
+    int interpolatedMax;
+    
+    for(int i = 0; i < kBufferLength/2 - kWindowLength; i++){
+        
+        for(int j = 0; j < kWindowLength; j++){
+            
+            if(self.fftMagnitudeBufferAvg[j+i]){
+                max = self.fftMagnitudeBufferAvg[j+i];
+                maxIndex = j;
+            }
+            
+        }
+        
+        if(maxIndex == 24){
+            
+            //interpolatedMax = [self peakInterpolation:(i)];
+            NSLog(@"found a max frequency %d", i*kdf); //interpolatedMax);
+        }
+        
+    }
+}
+
+-(int)peakInterpolation: (int) index{
+    
+    int interpolated = index*kdf + (((self.fftMagnitudeBufferAvg[index+1] - self.fftMagnitudeBufferAvg[index])/(2*self.fftMagnitudeBufferAvg[index] - self.fftMagnitudeBufferAvg[index - 1] - self.fftMagnitudeBufferAvg[index+1])) * (kdf/2));
+    
+    NSLog(@"Interpolated %d to %d", index*kdf, interpolated);
+    
+    return interpolated;
     
 }
 
