@@ -754,14 +754,14 @@ void sessionPropertyListener(void *                  inClientData,
     
     // Check the number of input channels.
     // Find the number of channels
-    self.numInputChannels = session.inputNumberOfChannels;
+    self.numInputChannels = (UInt32) session.inputNumberOfChannels;
     //    self.numInputChannels = 1;
     NSLog(@"We've got %u input channels", (unsigned int)self.numInputChannels);
     
     
     // Check the number of input channels.
     // Find the number of channels
-    self.numOutputChannels = session.outputNumberOfChannels;
+    self.numOutputChannels = (UInt32) session.outputNumberOfChannels;
     //    self.numOutputChannels = 1;
     NSLog(@"We've got %u output channels", (unsigned int)self.numOutputChannels);
     

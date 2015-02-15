@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--ModuleA Master View Controller-->
@@ -16,32 +17,77 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xvF-1w-cAz">
-                                <rect key="frame" x="206" y="207" width="134" height="30"/>
-                                <state key="normal" title="Detect Frequencies">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="onFrequencyClick:" destination="3vP-vP-ZG6" eventType="touchUpInside" id="fyZ-PF-6bD"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vYU-F8-bKA">
-                                <rect key="frame" x="228" y="340" width="90" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vYU-F8-bKA">
+                                <rect key="frame" x="255" y="337" width="90" height="30"/>
                                 <state key="normal" title="Detect Tones">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="155" y="337" width="90" height="30"/>
+                                </variation>
                                 <connections>
                                     <action selector="onToneClick:" destination="3vP-vP-ZG6" eventType="touchUpInside" id="sRK-Ba-rpy"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xvF-1w-cAz">
+                                <rect key="frame" x="233" y="186" width="134" height="30"/>
+                                <state key="normal" title="Detect Frequencies">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="133" y="208" width="134" height="30"/>
+                                </variation>
+                                <connections>
+                                    <action selector="onFrequencyClick:" destination="3vP-vP-ZG6" eventType="touchUpInside" id="fyZ-PF-6bD"/>
+                                    <segue destination="4pR-8j-Fwp" kind="show" id="CIq-Xu-ckS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xvF-1w-cAz" firstAttribute="top" secondItem="8Aa-yV-pNd" secondAttribute="bottom" constant="188" id="04O-qm-qcf"/>
+                            <constraint firstAttribute="centerY" secondItem="vYU-F8-bKA" secondAttribute="centerY" constant="-52" id="9Ai-f6-3IC"/>
+                            <constraint firstAttribute="centerY" secondItem="xvF-1w-cAz" secondAttribute="centerY" constant="99" id="Lv1-IN-rhm"/>
+                            <constraint firstAttribute="centerX" secondItem="xvF-1w-cAz" secondAttribute="centerX" id="Ocl-gV-IV3"/>
+                            <constraint firstAttribute="centerX" secondItem="vYU-F8-bKA" secondAttribute="centerX" id="Shr-tQ-VYT"/>
+                            <constraint firstItem="xvF-1w-cAz" firstAttribute="leading" secondItem="8Pa-Vm-U34" secondAttribute="leadingMargin" constant="217" id="WWu-h9-kJn"/>
+                            <constraint firstAttribute="centerX" secondItem="xvF-1w-cAz" secondAttribute="centerX" id="XtO-Hz-C6I"/>
+                            <constraint firstItem="vYU-F8-bKA" firstAttribute="top" secondItem="xvF-1w-cAz" secondAttribute="bottom" constant="99" id="mxU-LU-Hn9"/>
+                            <constraint firstAttribute="centerX" secondItem="vYU-F8-bKA" secondAttribute="centerX" id="wQX-r4-WNa"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="04O-qm-qcf"/>
+                                <exclude reference="WWu-h9-kJn"/>
+                                <exclude reference="mxU-LU-Hn9"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="f0Y-lo-kMJ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sGb-SO-6fb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="598" y="902"/>
+        </scene>
+        <!--GLKit View Controller-->
+        <scene sceneID="Fbe-0h-kmX">
+            <objects>
+                <glkViewController preferredFramesPerSecond="30" id="4pR-8j-Fwp" customClass="FrequenciesViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dbJ-fs-0lv"/>
+                        <viewControllerLayoutGuide type="bottom" id="eTb-b1-S6W"/>
+                    </layoutGuides>
+                    <glkView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" enableSetNeedsDisplay="NO" id="fCP-lf-1CU">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <connections>
+                            <outlet property="delegate" destination="4pR-8j-Fwp" id="RJ3-mP-4mf"/>
+                        </connections>
+                    </glkView>
+                </glkViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="voc-Qi-Wk8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1344" y="902"/>
         </scene>
     </scenes>
 </document>
