@@ -17,7 +17,7 @@
 #define kBufferLength 14700 //4096
 #define kframesPerSecond 30
 #define knumDataArraysToGraph 1
-#define kWindowLength 50
+#define kWindowLength 16
 #define kNumOfMaximums 2
 #define kdf 44100/kBufferLength
 
@@ -30,14 +30,6 @@
 @property (nonatomic)SMUFFTHelper *fftHelper;
 @property (nonatomic)float *fftMagnitudeBuffer;
 @property (nonatomic)float *fftPhaseBuffer;
-
-@property (nonatomic)float *fftMagnitudeBuffer2;
-@property (nonatomic)float *fftPhaseBuffer2;
-
-@property (nonatomic)float *fftMagnitudeBuffer3;
-@property (nonatomic)float *fftPhaseBuffer3;
-
-@property (nonatomic)float *fftMagnitudeBufferAvg;
 
 @property (nonatomic)float *dilationLocalMaxFrequency;
 @property (nonatomic)float *localMaximums;
@@ -86,36 +78,6 @@ RingBuffer *ringBuffer;
     if(!_fftPhaseBuffer)
         _fftPhaseBuffer = (float *)calloc(kBufferLength/2,sizeof(float));
     return _fftPhaseBuffer;
-}
-
--(float*) fftMagnitudeBuffer2 {
-    if(!_fftMagnitudeBuffer2)
-        _fftMagnitudeBuffer2 = (float *)calloc(kBufferLength/2,sizeof(float));
-    return _fftMagnitudeBuffer2;
-}
-
--(float*) fftPhaseBuffer2 {
-    if(!_fftPhaseBuffer2)
-        _fftPhaseBuffer2 = (float *)calloc(kBufferLength/2,sizeof(float));
-    return _fftPhaseBuffer2;
-}
-
--(float*) fftMagnitudeBuffer3 {
-    if(!_fftMagnitudeBuffer3)
-        _fftMagnitudeBuffer3 = (float *)calloc(kBufferLength/2,sizeof(float));
-    return _fftMagnitudeBuffer3;
-}
-
--(float*) fftPhaseBuffer3 {
-    if(!_fftPhaseBuffer3)
-        _fftPhaseBuffer3 = (float *)calloc(kBufferLength/2,sizeof(float));
-    return _fftPhaseBuffer3;
-}
-
--(float*) fftMagnitudeBufferAvg {
-    if(!_fftMagnitudeBufferAvg)
-        _fftMagnitudeBufferAvg = (float *)calloc(kBufferLength/2,sizeof(float));
-    return _fftMagnitudeBufferAvg;
 }
 
 -(float*) dilationLocalMaxFrequency {
@@ -173,14 +135,6 @@ RingBuffer *ringBuffer;
     free(self.fftMagnitudeBuffer);
     free(self.fftPhaseBuffer);
     
-    free(self.fftMagnitudeBuffer2);
-    free(self.fftPhaseBuffer2);
-    
-    free(self.fftMagnitudeBuffer3);
-    free(self.fftPhaseBuffer3);
-    
-    free(self.fftMagnitudeBufferAvg);
-    
     delete self.fftHelper;
     delete ringBuffer;
     delete self.graphHelper;
@@ -211,16 +165,11 @@ RingBuffer *ringBuffer;
     
     //take the FFT
     self.fftHelper->forward(0,self.audioData, self.fftMagnitudeBuffer, self.fftPhaseBuffer);
-    self.fftHelper->forward(0,self.audioData, self.fftMagnitudeBuffer2, self.fftPhaseBuffer2);
-    self.fftHelper->forward(0,self.audioData, self.fftMagnitudeBuffer3, self.fftPhaseBuffer3);
-    [self removeVarianceInMagnitude];
     [self convertToDecibels];
     [self findMaxUsingDilation];
     
     // plot the FFT
-    self.graphHelper->setGraphData(0,self.fftMagnitudeBufferAvg,kBufferLength/8,sqrt(kBufferLength)); // set graph channel
-    //self.graphHelper->setGraphData(1,self.fftMagnitudeBuffer2,kBufferLength/8,sqrt(kBufferLength));
-    //self.graphHelper->setGraphData(2,self.fftMagnitudeBuffer3,kBufferLength/8,sqrt(kBufferLength));
+    self.graphHelper->setGraphData(0,self.fftMagnitudeBuffer,kBufferLength/8,sqrt(kBufferLength)); // set graph channel
     
 }
 
@@ -229,21 +178,12 @@ RingBuffer *ringBuffer;
     return YES;
 }
 
--(void)removeVarianceInMagnitude{
-    
-    for(int i = 0; i < kBufferLength/2; i++){
-        
-        self.fftMagnitudeBufferAvg[i] = (self.fftMagnitudeBuffer[i] + self.fftMagnitudeBuffer2[i] + self.fftMagnitudeBuffer3[i])/3;
-        
-    }
-    
-}
 
 -(void)convertToDecibels{
     
     for(int i = 0; i < kBufferLength/2; i++){
-        if(self.fftMagnitudeBufferAvg[i] > 1)
-            self.fftMagnitudeBufferAvg[i] = 20 * log10f(abs(self.fftMagnitudeBufferAvg[i]));
+        if(self.fftMagnitudeBuffer[i] > 1)
+            self.fftMagnitudeBuffer[i] = 20 * log10f(self.fftMagnitudeBuffer[i]);
     }
     
 }
@@ -258,17 +198,17 @@ RingBuffer *ringBuffer;
         
         for(int j = 0; j < kWindowLength; j++){
             
-            if(self.fftMagnitudeBufferAvg[j+i]){
-                max = self.fftMagnitudeBufferAvg[j+i];
+            if(self.fftMagnitudeBuffer[j+i] > max){
+                max = self.fftMagnitudeBuffer[j+i];
                 maxIndex = j;
             }
             
         }
         
-        if(maxIndex == 24){
+        if(maxIndex == 7){
             
             //interpolatedMax = [self peakInterpolation:(i)];
-            NSLog(@"found a max frequency %d", i*kdf); //interpolatedMax);
+            NSLog(@"found max frequency %d at %d", (maxIndex+i)*kdf, (maxIndex+i)); //interpolatedMax);
         }
         
     }
@@ -276,7 +216,7 @@ RingBuffer *ringBuffer;
 
 -(int)peakInterpolation: (int) index{
     
-    int interpolated = index*kdf + (((self.fftMagnitudeBufferAvg[index+1] - self.fftMagnitudeBufferAvg[index])/(2*self.fftMagnitudeBufferAvg[index] - self.fftMagnitudeBufferAvg[index - 1] - self.fftMagnitudeBufferAvg[index+1])) * (kdf/2));
+    int interpolated = index*kdf + (((self.fftMagnitudeBuffer[index+1] - self.fftMagnitudeBuffer[index])/(2*self.fftMagnitudeBuffer[index] - self.fftMagnitudeBuffer[index - 1] - self.fftMagnitudeBuffer[index+1])) * (kdf/2));
     
     NSLog(@"Interpolated %d to %d", index*kdf, interpolated);
     
