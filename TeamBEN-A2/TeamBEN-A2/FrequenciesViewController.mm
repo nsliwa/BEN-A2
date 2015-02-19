@@ -14,12 +14,13 @@
 #import "SMUFFTHelper.h"
 #import "SMUGraphHelper.h"
 
-#define kBufferLength 14700 //4096
+#define kSamplingRate 44100.00
+#define kBufferLength 8820 //14700 //4096
 #define kframesPerSecond 30
 #define knumDataArraysToGraph 1
-#define kWindowLength 16
+#define kWindowLength 10
 #define kNumOfMaximums 2
-#define kdf 44100/kBufferLength
+#define kdf kSamplingRate/kBufferLength
 
 @interface FrequenciesViewController ()
 
@@ -33,6 +34,9 @@
 
 @property (nonatomic)float *dilationLocalMaxFrequency;
 @property (nonatomic)float *localMaximums;
+@property (weak, nonatomic) IBOutlet UILabel *firstFrequency;
+@property (weak, nonatomic) IBOutlet UILabel *secondFrequency;
+
 
 @end
 
@@ -195,17 +199,19 @@ RingBuffer *ringBuffer;
     float tempMax = 0.0;
     int tempMaxIndex = 0;
     int maxIndex = 0;
+    int maxIndex2 = 0;
     
     int interpolatedMax;
+    int interpolatedMax2;
     
     //Turn to decibels and look for max using dilation
     for(int i = 0; i < kBufferLength/2; i++){
         
-        //self.fftMagnitudeBuffer[i] = 20 * log10f(self.fftMagnitudeBuffer[i]);
+        self.fftMagnitudeBuffer[i] = 20 * log10f(self.fftMagnitudeBuffer[i]);
         
         for(int j = 0; j < kWindowLength; j++){
             
-            if(self.fftMagnitudeBuffer[i+j] >= tempMax){
+            if(self.fftMagnitudeBuffer[i+j] >= tempMax && self.fftMagnitudeBuffer[i+j] > 25){
                 tempMax = self.fftMagnitudeBuffer[i+j];
                 tempMaxIndex = j;
                 
@@ -215,16 +221,30 @@ RingBuffer *ringBuffer;
         
         
         if(tempMaxIndex == kWindowLength/2){
-            secondMax = max;
-            max = tempMax;
-            maxIndex = tempMaxIndex + i;
+            
+            if(tempMax >= max){
+                secondMax = max;
+                maxIndex2 = maxIndex;
+                max = tempMax;
+                maxIndex = tempMaxIndex + i;
+            }else if(tempMax >= secondMax){
+                secondMax = tempMax;
+                maxIndex2 = tempMaxIndex + i;
+            }
         }
         
+        tempMax = 0.0;
+        
     }
-    if(maxIndex != 0){
+    if(maxIndex != 0 && maxIndex2 != 0){
         
         interpolatedMax = [self peakInterpolation:(maxIndex)];
-        NSLog(@"Found max local freq. %d at %d", interpolatedMax, maxIndex);
+        interpolatedMax2 = [self peakInterpolation:(maxIndex2)];
+        NSLog(@"1st max: %d at %d \n 2nd max: %d at %d", interpolatedMax, maxIndex, interpolatedMax2, maxIndex2);
+        self.firstFrequency.text = [NSString stringWithFormat:@"1st frequency: %d",interpolatedMax];
+        self.secondFrequency.text = [NSString stringWithFormat:@"2nd frequency: %d",interpolatedMax2];
+        
+        
     }
 }
 
@@ -232,9 +252,16 @@ RingBuffer *ringBuffer;
 
 -(int)peakInterpolation: (int) index{
     
-    int interpolated = index*kdf + (((self.fftMagnitudeBuffer[index+1] - self.fftMagnitudeBuffer[index])/(2*self.fftMagnitudeBuffer[index] - self.fftMagnitudeBuffer[index - 1] - self.fftMagnitudeBuffer[index+1])) * (kdf/2));
+    int f2 = index*kdf;
     
-    NSLog(@"Interpolated %d to %d", index*kdf, interpolated);
+    float m3 = self.fftMagnitudeBuffer[index+1];
+    float m2 = self.fftMagnitudeBuffer[index];
+    float m1 = self.fftMagnitudeBuffer[index-1];
+    
+    
+    int interpolated = f2 + ((m3-m1)/(2*m2-m1-m3))*(kdf/2);
+    
+    //NSLog(@"Interpolated %d to %d ", old, interpolated);
     
     return interpolated;
     
