@@ -7,7 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <GLKit/GLKit.h>
 
+
+// for callback: http://stackoverflow.com/questions/1015608/how-to-perform-callbacks-in-objective-c
 @interface ModuleB_MasterVIewControllerViewController : UIViewController
+{
+    void (^_frequencyHandler)(int freq);
+}
+
+//@property (weak, nonatomic) IBOutlet UILabel *label_Frequency;
+
+- (void) getFrequencyHandler:(void(^)(int))handler;
+
 
 @end
