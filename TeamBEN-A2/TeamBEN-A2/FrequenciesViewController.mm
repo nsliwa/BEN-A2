@@ -113,7 +113,7 @@ RingBuffer *ringBuffer;
     
     ringBuffer = new RingBuffer(kBufferLength,2);
     
-    self.graphHelper->SetBounds(-0.5,0.8,-0.9,0.9); // bottom, top, left, right, full screen==(-1,1,-1,1)
+    self.graphHelper->SetBounds(-0.8,0.8,-0.9,0.9); // bottom, top, left, right, full screen==(-1,1,-1,1)
     
     
     
@@ -165,11 +165,11 @@ RingBuffer *ringBuffer;
     
     //take the FFT
     self.fftHelper->forward(0,self.audioData, self.fftMagnitudeBuffer, self.fftPhaseBuffer);
-    [self convertToDecibels];
+    //[self convertToDecibels];
     [self findMaxUsingDilation];
     
     // plot the FFT
-    self.graphHelper->setGraphData(0,self.fftMagnitudeBuffer,kBufferLength/8,sqrt(kBufferLength)); // set graph channel
+    self.graphHelper->setGraphData(0,self.fftMagnitudeBuffer,kBufferLength/4,sqrt(kBufferLength)); // set graph channel
     
 }
 
@@ -178,41 +178,57 @@ RingBuffer *ringBuffer;
     return YES;
 }
 
-
+/*
 -(void)convertToDecibels{
     
     for(int i = 0; i < kBufferLength/2; i++){
-        if(self.fftMagnitudeBuffer[i] > 1)
-            self.fftMagnitudeBuffer[i] = 20 * log10f(self.fftMagnitudeBuffer[i]);
+        self.fftMagnitudeBuffer[i] = 20 * log10f(self.fftMagnitudeBuffer[i]);
     }
     
 }
+*/
 
 -(void)findMaxUsingDilation{
     
     float max = 0.0;
+    float secondMax = 0.0;
+    float tempMax = 0.0;
+    int tempMaxIndex = 0;
     int maxIndex = 0;
+    
     int interpolatedMax;
     
-    for(int i = 0; i < kBufferLength/2 - kWindowLength; i++){
+    //Turn to decibels and look for max using dilation
+    for(int i = 0; i < kBufferLength/2; i++){
+        
+        //self.fftMagnitudeBuffer[i] = 20 * log10f(self.fftMagnitudeBuffer[i]);
         
         for(int j = 0; j < kWindowLength; j++){
             
-            if(self.fftMagnitudeBuffer[j+i] > max){
-                max = self.fftMagnitudeBuffer[j+i];
-                maxIndex = j;
+            if(self.fftMagnitudeBuffer[i+j] >= tempMax){
+                tempMax = self.fftMagnitudeBuffer[i+j];
+                tempMaxIndex = j;
+                
             }
             
         }
         
-        if(maxIndex == 7){
-            
-            //interpolatedMax = [self peakInterpolation:(i)];
-            NSLog(@"found max frequency %d at %d", (maxIndex+i)*kdf, (maxIndex+i)); //interpolatedMax);
+        
+        if(tempMaxIndex == kWindowLength/2){
+            secondMax = max;
+            max = tempMax;
+            maxIndex = tempMaxIndex + i;
         }
         
     }
+    if(maxIndex != 0){
+        
+        interpolatedMax = [self peakInterpolation:(maxIndex)];
+        NSLog(@"Found max local freq. %d at %d", interpolatedMax, maxIndex);
+    }
 }
+
+
 
 -(int)peakInterpolation: (int) index{
     
@@ -223,5 +239,6 @@ RingBuffer *ringBuffer;
     return interpolated;
     
 }
+
 
 @end
