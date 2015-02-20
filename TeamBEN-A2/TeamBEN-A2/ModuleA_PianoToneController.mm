@@ -15,7 +15,7 @@
 #import "SMUGraphHelper.h"
 
 #define kSamplingRate 44100.00
-#define kBufferLength 8820 //14700 //4096
+#define kBufferLength 8192 //14700 //4096
 #define kframesPerSecond 30
 #define knumDataArraysToGraph 1
 #define kWindowLength 10
@@ -124,6 +124,8 @@ RingBuffer *ringBufferPiano;
     // stop opengl from running
     self.graphHelperPiano->tearDownGL();
     [self.audioManagerPiano pause];
+    
+    [super viewDidDisappear:animated];
 }
 
 -(void)dealloc{
@@ -165,15 +167,11 @@ RingBuffer *ringBufferPiano;
     //take the FFT
     self.fftHelperPiano->forward(0,self.audioDataPiano, self.fftMagnitudeBufferPiano, self.fftPhaseBufferPiano);
     //[self convertToDecibels];
+    [self findMaxUsingDilation];
     
     // plot the FFT
     self.graphHelperPiano->setGraphData(0,self.fftMagnitudeBufferPiano,kBufferLength/4,sqrt(kBufferLength)); // set graph channel
     
-}
-
-#pragma mark - status bar
--(BOOL)prefersStatusBarHidden{
-    return YES;
 }
 
 -(void)findMaxUsingDilation{
@@ -228,6 +226,7 @@ RingBuffer *ringBufferPiano;
         NSLog(@"1st max: %d at %d \n 2nd max: %d at %d", interpolatedMax, maxIndex, interpolatedMax2, maxIndex2);
         //self.firstFrequency.text = [NSString stringWithFormat:@"1st frequency: %d",interpolatedMax];
         //self.secondFrequency.text = [NSString stringWithFormat:@"2nd frequency: %d",interpolatedMax2];
+        NSLog(@"Maximum harmonic frequency: %@", [self determineNote:(interpolatedMax)]);
         self.noteLabel.text = [self determineNote:(interpolatedMax)];
         
     }
