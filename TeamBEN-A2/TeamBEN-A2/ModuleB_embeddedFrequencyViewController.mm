@@ -409,7 +409,19 @@ RingBuffer *ringBuff;
         
         self.graphHelper->setGraphData(1,self.fftMagnitudeBufferSubsetDifference,kSubSetLength,sqrt(kSubSetLength)); // set graph channel
         
-        NSLog(@"maxIdx: %d", maxIdx);
+        //NSLog(@"maxIdx: %d, difference: %f", maxIdx, self.fftMagnitudeBufferSubsetDifference[maxIdx]);
+        
+        if(self.fftMagnitudeBufferSubsetDifference[maxIdx] > .1) {
+            if(maxIdx > kSubSetLength/2 +2) {
+                NSLog(@"TOWARD");
+            }
+            else if(maxIdx < kSubSetLength/2 -2) {
+                NSLog(@"AWAY");
+            }
+        }
+        else {
+            NSLog(@"-----");
+        }
         
         
     /*

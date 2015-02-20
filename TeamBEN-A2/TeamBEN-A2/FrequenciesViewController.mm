@@ -177,12 +177,12 @@ RingBuffer *ringBuffer;
     self.graphHelper->setGraphData(0,self.fftMagnitudeBuffer,kBufferLength/4,sqrt(kBufferLength)); // set graph channel
     
 }
-
+/*
 #pragma mark - status bar
 -(BOOL)prefersStatusBarHidden{
     return YES;
 }
-
+*/
 /*
 -(void)convertToDecibels{
     
