@@ -15,7 +15,7 @@
 #import "SMUGraphHelper.h"
 
 #define kSamplingRate 44100.00
-#define kBufferLength 8820 //14700 //4096
+#define kBufferLength 8192 //14700 //4096
 #define kframesPerSecond 30
 #define knumDataArraysToGraph 1
 #define kWindowLength 10
@@ -212,7 +212,7 @@ RingBuffer *ringBuffer;
         
         for(int j = 0; j < kWindowLength; j++){
             
-            if(self.fftMagnitudeBuffer[i+j] >= tempMax && self.fftMagnitudeBuffer[i+j] > 25){
+            if(self.fftMagnitudeBuffer[i+j] >= tempMax && self.fftMagnitudeBuffer[i+j] > 30){
                 tempMax = self.fftMagnitudeBuffer[i+j];
                 tempMaxIndex = j;
                 
@@ -259,8 +259,8 @@ RingBuffer *ringBuffer;
     float m2 = self.fftMagnitudeBuffer[index];
     float m1 = self.fftMagnitudeBuffer[index-1];
     
-    
-    int interpolated = f2 + ((m3-m1)/(2*m2-m1-m3))*(kdf/2);
+    //int interpolated = f2 + ((m3-m2)/(2*m2-m1-m2))*(kdf/2);
+    int interpolated = f2 + ((m3 - m1)/(2*m2 - m1 - m3))*(kdf/2);
     
     //NSLog(@"Interpolated %d to %d ", old, interpolated);
     
