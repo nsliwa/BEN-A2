@@ -24,7 +24,7 @@
 }
 
 - (IBAction)onToneClick:(id)sender {
-    UIStoryboard* storyBoard;
+   /* UIStoryboard* storyBoard;
     UIViewController* controller;
     
     storyBoard = [UIStoryboard storyboardWithName:@"Piano" bundle:nil];
@@ -34,7 +34,7 @@
                   @"ModuleA_PianoToneController"];
     NSLog(@"ModuleA_PianoToneController");
     
-    [self.navigationController pushViewController:controller animated:YES];
+    [self.navigationController pushViewController:controller animated:YES];*/
 
     
     

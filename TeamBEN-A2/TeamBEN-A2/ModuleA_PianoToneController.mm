@@ -24,16 +24,16 @@
 
 @interface ModuleA_PianoToneController ()
 
-@property (strong, nonatomic) Novocaine *audioManager;
+@property (strong, nonatomic) Novocaine *audioManagerPiano;
 @property (nonatomic)GraphHelper *graphHelperPiano;
-@property (nonatomic)float *audioData;
+@property (nonatomic)float *audioDataPiano;
 
-@property (nonatomic)SMUFFTHelper *fftHelper;
-@property (nonatomic)float *fftMagnitudeBuffer;
-@property (nonatomic)float *fftPhaseBuffer;
+@property (nonatomic)SMUFFTHelper *fftHelperPiano;
+@property (nonatomic)float *fftMagnitudeBufferPiano;
+@property (nonatomic)float *fftPhaseBufferPiano;
 
-@property (nonatomic)float *dilationLocalMaxFrequency;
-@property (nonatomic)float *localMaximums;
+@property (nonatomic)float *dilationLocalMaxFrequencyPiano;
+@property (nonatomic)float *localMaximumsPiano;
 
 @end
 
@@ -41,10 +41,10 @@
 
 RingBuffer *ringBufferPiano;
 
--(Novocaine*) audioManager {
-    if(!_audioManager)
-        _audioManager = [Novocaine audioManager];
-    return _audioManager;
+-(Novocaine*) audioManagerPiano {
+    if(!_audioManagerPiano)
+        _audioManagerPiano = [Novocaine audioManager];
+    return _audioManagerPiano;
 }
 
 -(GraphHelper*) graphHelperPiano {
@@ -57,40 +57,40 @@ RingBuffer *ringBufferPiano;
     return _graphHelperPiano;
 }
 
--(float*) audioData {
-    if(!_audioData)
-        _audioData = (float*)calloc(kBufferLength,sizeof(float));
-    return _audioData;
+-(float*) audioDataPiano {
+    if(!_audioDataPiano)
+        _audioDataPiano = (float*)calloc(kBufferLength,sizeof(float));
+    return _audioDataPiano;
 }
 
--(SMUFFTHelper*) fftHelper {
-    if(!_fftHelper)
-        _fftHelper = new SMUFFTHelper(kBufferLength,kBufferLength,WindowTypeRect);
-    return _fftHelper;
+-(SMUFFTHelper*) fftHelperPiano {
+    if(!_fftHelperPiano)
+        _fftHelperPiano = new SMUFFTHelper(kBufferLength,kBufferLength,WindowTypeRect);
+    return _fftHelperPiano;
 }
 
--(float*) fftMagnitudeBuffer {
-    if(!_fftMagnitudeBuffer)
-        _fftMagnitudeBuffer = (float *)calloc(kBufferLength/2,sizeof(float));
-    return _fftMagnitudeBuffer;
+-(float*) fftMagnitudeBufferPiano {
+    if(!_fftMagnitudeBufferPiano)
+        _fftMagnitudeBufferPiano = (float *)calloc(kBufferLength/2,sizeof(float));
+    return _fftMagnitudeBufferPiano;
 }
 
--(float*) fftPhaseBuffer {
-    if(!_fftPhaseBuffer)
-        _fftPhaseBuffer = (float *)calloc(kBufferLength/2,sizeof(float));
-    return _fftPhaseBuffer;
+-(float*) fftPhaseBufferPiano {
+    if(!_fftPhaseBufferPiano)
+        _fftPhaseBufferPiano = (float *)calloc(kBufferLength/2,sizeof(float));
+    return _fftPhaseBufferPiano;
 }
 
--(float*) dilationLocalMaxFrequency {
-    if(!_dilationLocalMaxFrequency)
-        _dilationLocalMaxFrequency = (float *)calloc(kWindowLength,sizeof(float));
-    return _dilationLocalMaxFrequency;
+-(float*) dilationLocalMaxFrequencyPiano {
+    if(!_dilationLocalMaxFrequencyPiano)
+        _dilationLocalMaxFrequencyPiano = (float *)calloc(kWindowLength,sizeof(float));
+    return _dilationLocalMaxFrequencyPiano;
 }
 
--(float*) localMaximums {
-    if(!_localMaximums)
-        _localMaximums = (float *)calloc(kNumOfMaximums, sizeof(float));
-    return _localMaximums;
+-(float*) localMaximumsPiano {
+    if(!_localMaximumsPiano)
+        _localMaximumsPiano = (float *)calloc(kNumOfMaximums, sizeof(float));
+    return _localMaximumsPiano;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -99,9 +99,9 @@ RingBuffer *ringBufferPiano;
     
     
     
-    [self.audioManager play];
+    [self.audioManagerPiano play];
     
-    [self.audioManager setInputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels)
+    [self.audioManagerPiano setInputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels)
      {
          if(ringBufferPiano!=nil)
              ringBufferPiano->AddNewFloatData(data, numFrames);
@@ -121,24 +121,24 @@ RingBuffer *ringBufferPiano;
 -(void) viewDidDisappear:(BOOL)animated{
     // stop opengl from running
     self.graphHelperPiano->tearDownGL();
-    [self.audioManager pause];
+    [self.audioManagerPiano pause];
 }
 
 -(void)dealloc{
     self.graphHelperPiano->tearDownGL();
     
-    free(self.audioData);
+    free(self.audioDataPiano);
     
-    free(self.fftMagnitudeBuffer);
-    free(self.fftPhaseBuffer);
+    free(self.fftMagnitudeBufferPiano);
+    free(self.fftPhaseBufferPiano);
     
-    delete self.fftHelper;
+    delete self.fftHelperPiano;
     delete ringBufferPiano;
     delete self.graphHelperPiano;
     
     ringBufferPiano = nil;
-    self.fftHelper  = nil;
-    self.audioManager = nil;
+    self.fftHelperPiano  = nil;
+    self.audioManagerPiano = nil;
     self.graphHelperPiano = nil;
     
     
@@ -158,14 +158,14 @@ RingBuffer *ringBufferPiano;
 - (void)update{
     
     // plot the audio
-    ringBufferPiano->FetchFreshData2(self.audioData, kBufferLength, 0, 1);
+    ringBufferPiano->FetchFreshData2(self.audioDataPiano, kBufferLength, 0, 1);
     
     //take the FFT
-    self.fftHelper->forward(0,self.audioData, self.fftMagnitudeBuffer, self.fftPhaseBuffer);
+    self.fftHelperPiano->forward(0,self.audioDataPiano, self.fftMagnitudeBufferPiano, self.fftPhaseBufferPiano);
     //[self convertToDecibels];
     
     // plot the FFT
-    self.graphHelperPiano->setGraphData(0,self.fftMagnitudeBuffer,kBufferLength/4,sqrt(kBufferLength)); // set graph channel
+    self.graphHelperPiano->setGraphData(0,self.fftMagnitudeBufferPiano,kBufferLength/4,sqrt(kBufferLength)); // set graph channel
     
 }
 
