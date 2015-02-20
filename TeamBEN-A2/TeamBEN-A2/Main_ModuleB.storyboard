@@ -2,12 +2,12 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--ModuleB MasterV Iew Controller View Controller-->
         <scene sceneID="Vxh-vD-37Y">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GFM-oj-fc6" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="ModuleB_MasterViewController" id="mfk-aI-If1" customClass="ModuleB_MasterVIewControllerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="T5o-Pw-zIr"/>
@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="17500" minValue="200" maxValue="20000" translatesAutoresizingMaskIntoConstraints="NO" id="Jvq-44-ySb">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="17500" minValue="15000" maxValue="20000" translatesAutoresizingMaskIntoConstraints="NO" id="Jvq-44-ySb">
                                 <rect key="frame" x="241" y="550" width="118" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="114" id="utH-8g-UJV"/>
@@ -59,6 +59,15 @@
                                     <segue destination="WiP-lJ-coe" kind="embed" identifier="Segue_EmbeddedGLK" id="3Gm-Wl-qIC"/>
                                 </connections>
                             </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oIt-nw-i4Q">
+                                <rect key="frame" x="512" y="24" width="62" height="30"/>
+                                <state key="normal" title="Calibrate">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didClickCalibrate:" destination="mfk-aI-If1" eventType="touchUpInside" id="4VQ-eZ-eBF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -68,6 +77,7 @@
                             <constraint firstItem="Jvq-44-ySb" firstAttribute="centerX" secondItem="AyT-gt-4zD" secondAttribute="centerX" id="HTr-Wo-xBE"/>
                             <constraint firstItem="Jvq-44-ySb" firstAttribute="centerX" secondItem="huR-mx-o77" secondAttribute="centerX" constant="-28.5" id="IHy-0Q-ukX"/>
                             <constraint firstItem="HgG-oY-j1c" firstAttribute="baseline" secondItem="huR-mx-o77" secondAttribute="baseline" id="Jry-b0-GFd"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="oIt-nw-i4Q" secondAttribute="trailing" constant="10" id="K7N-vb-sGt"/>
                             <constraint firstAttribute="centerY" secondItem="Jvq-44-ySb" secondAttribute="centerY" constant="-265" id="NRk-Av-smz"/>
                             <constraint firstItem="vSz-HG-5dk" firstAttribute="leading" secondItem="mxi-bo-SNd" secondAttribute="trailing" constant="28" id="O9j-6c-vWm"/>
                             <constraint firstItem="Jvq-44-ySb" firstAttribute="leading" secondItem="HgG-oY-j1c" secondAttribute="trailing" constant="3" id="QS1-n5-hDB"/>
@@ -75,17 +85,19 @@
                             <constraint firstItem="huR-mx-o77" firstAttribute="leading" secondItem="HgG-oY-j1c" secondAttribute="trailing" constant="8" id="WUz-7G-NpJ"/>
                             <constraint firstItem="huR-mx-o77" firstAttribute="top" secondItem="Q17-ET-i9A" secondAttribute="bottom" constant="55" id="Zu1-Zi-kB2"/>
                             <constraint firstItem="2mC-qV-z2F" firstAttribute="top" secondItem="HgG-oY-j1c" secondAttribute="bottom" constant="49" id="gua-n4-3L8"/>
+                            <constraint firstItem="Q17-ET-i9A" firstAttribute="top" secondItem="oIt-nw-i4Q" secondAttribute="bottom" constant="29" id="rE7-KB-5rg"/>
                             <constraint firstItem="mxi-bo-SNd" firstAttribute="top" secondItem="T5o-Pw-zIr" secondAttribute="bottom" constant="8" symbolic="YES" id="t4i-UZ-cb3"/>
                             <constraint firstAttribute="bottom" secondItem="Jvq-44-ySb" secondAttribute="bottom" constant="20" symbolic="YES" id="u0j-3l-tfG"/>
                             <constraint firstItem="vSz-HG-5dk" firstAttribute="baseline" secondItem="mxi-bo-SNd" secondAttribute="baseline" id="zMa-or-Mda"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="label_Frequency" destination="huR-mx-o77" id="S6i-AP-23f"/>
+                        <outlet property="label_Frequency" destination="huR-mx-o77" id="Z8G-iY-cVO"/>
                         <outlet property="label_Gesture" destination="vSz-HG-5dk" id="Fth-69-GQY"/>
                         <outlet property="slider_Frequency" destination="Jvq-44-ySb" id="2p2-sG-Vv5"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GFM-oj-fc6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="655" y="251"/>
         </scene>

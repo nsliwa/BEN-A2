@@ -30,6 +30,7 @@
 #define kSubSetLength 25
 #define kArchiveLength 10
 #define kThrowAway 20
+#define kCalibrate 20
 
 
 @interface ModuleB_embeddedFrequencyViewController ()
@@ -68,6 +69,11 @@
 @property (strong, nonatomic)NSMutableArray *fftVariance_right;
 
 @property (nonatomic)int throwAwayCount;
+
+
+// idea for "ideal threshold" from Jarret Shook
+@property (nonatomic)float leftThreshold;
+@property (nonatomic)float rightThreshold;
 /*
  @property (nonatomic)float *dilationLocalMaxFrequency;
  @property (nonatomic)float *localMaximums;
@@ -212,6 +218,18 @@ RingBuffer *ringBuff;
     return _throwAwayCount;
 }
 
+-(float) leftThreshold {
+    if(!_leftThreshold)
+        _leftThreshold = 0;
+    return _leftThreshold;
+}
+
+-(float) rightThreshold {
+    if(!_rightThreshold)
+        _rightThreshold = 0;
+    return _rightThreshold;
+}
+
 /*
 - (IBAction)didUpdateFrequency:(id)sender {
     UISlider *slider = (UISlider *)sender;
@@ -307,6 +325,7 @@ RingBuffer *ringBuff;
     
     //get current Frequency
     ModuleB_MasterVIewControllerViewController *master = [[ModuleB_MasterVIewControllerViewController alloc] init];
+    
     __block float freq = 0;
     
     [master getFrequencyHandler:^(int frequency){
@@ -323,7 +342,7 @@ RingBuffer *ringBuff;
     self.fftHelper->forward(0,self.audioData, self.fftMagnitudeBuffer2, self.fftPhaseBuffer2);
     self.fftHelper->forward(0,self.audioData, self.fftMagnitudeBuffer3, self.fftPhaseBuffer3);
     [self removeVarianceInMagnitude];
-    //[self convertToDecibels];
+    [self convertToDecibels];
     //[self findMaxUsingDilation];
     
     float frequencyIndex = self.outputFrequency;
@@ -331,6 +350,7 @@ RingBuffer *ringBuff;
     int frequencyIdx = floor(frequencyIndex);
     
     //NSLog(@"frequencyIndex: %f, frequencyIdx: %d, outputFreq: %d, kdf: %f", frequencyIndex, frequencyIdx, (int)floor(self.outputFrequency), kdf);
+    
     
     for(int i=0; i<kSubSetLength; i++) {
         if(frequencyIdx - kSubSetLength/2 < 0) {
@@ -356,7 +376,7 @@ RingBuffer *ringBuff;
     //self.graphHelper->setGraphData(1,self.fftMagnitudeBuffer2,kBufferLength/8,sqrt(kBufferLength));
     //self.graphHelper->setGraphData(2,self.fftMagnitudeBuffer3,kBufferLength/8,sqrt(kBufferLength));
     
-    if(self.outputFrequency == self.outputFrequencyPrevious && self.throwAwayCount == kThrowAway)
+    if(self.outputFrequency == self.outputFrequencyPrevious && self.throwAwayCount == kCalibrate + kThrowAway)
     {
         int nNearestFreq = kSubSetLength / 2;
         
@@ -399,7 +419,7 @@ RingBuffer *ringBuff;
         
         for(int i=0; i<kSubSetLength; i++) {
             self.fftMagnitudeBufferSubsetDifference[i] = self.fftMagnitudeBufferSubset[i] - self.fftMagnitudeBufferSubsetBaseline[i];
-            self.fftMagnitudeBufferSubsetDifference[i] /= peak;
+            //self.fftMagnitudeBufferSubsetDifference[i] /= peak;
             
             if(self.fftMagnitudeBufferSubsetDifference[i] > maxFreq) {
                 maxFreq = self.fftMagnitudeBufferSubsetDifference[i];
@@ -409,19 +429,43 @@ RingBuffer *ringBuff;
         
         self.graphHelper->setGraphData(1,self.fftMagnitudeBufferSubsetDifference,kSubSetLength,sqrt(kSubSetLength)); // set graph channel
         
-        //NSLog(@"maxIdx: %d, difference: %f", maxIdx, self.fftMagnitudeBufferSubsetDifference[maxIdx]);
         
-        if(self.fftMagnitudeBufferSubsetDifference[maxIdx] > .1) {
+        ModuleB_MasterVIewControllerViewController *parent = (ModuleB_MasterVIewControllerViewController *)self.parentViewController;
+        
+        /*
+        if(maxIdx > kSubSetLength/2 +2 && self.fftMagnitudeBufferSubsetDifference[maxIdx] > self.rightThreshold*1.1) {
+            NSLog(@"maxIdx: %d, difference: %f, trueThreshold: %f", maxIdx, self.fftMagnitudeBufferSubsetDifference[maxIdx], self.rightThreshold);
+            NSLog(@"TOWARD");
+            dispatch_async(dispatch_get_main_queue(), ^ {parent.label_Gesture.text = @"TOWARD";});
+        }
+        else if(maxIdx < kSubSetLength/2 -2 && self.fftMagnitudeBufferSubsetDifference[maxIdx] > self.leftThreshold*1.1) {
+            NSLog(@"maxIdx: %d, difference: %f, trueThreshold: %f", maxIdx, self.fftMagnitudeBufferSubsetDifference[maxIdx], self.leftThreshold);
+            NSLog(@"AWAY");
+            dispatch_async(dispatch_get_main_queue(), ^ {parent.label_Gesture.text = @"AWAY";});
+        }
+        else {
+            NSLog(@"maxIdx: %d, difference: %f, rightThreshold: %f, leftThreshold: %f", maxIdx, self.fftMagnitudeBufferSubsetDifference[maxIdx], self.rightThreshold, self.leftThreshold);
+            NSLog(@"-----");
+            dispatch_async(dispatch_get_main_queue(), ^ {parent.label_Gesture.text = @"STATIONARY";});
+        }
+         */
+        
+        
+        if(self.fftMagnitudeBufferSubsetDifference[maxIdx] > 4) {
             if(maxIdx > kSubSetLength/2 +2) {
                 NSLog(@"TOWARD");
+                dispatch_async(dispatch_get_main_queue(), ^ {parent.label_Gesture.text = @"TOWARD";});
             }
             else if(maxIdx < kSubSetLength/2 -2) {
                 NSLog(@"AWAY");
+                dispatch_async(dispatch_get_main_queue(), ^ {parent.label_Gesture.text = @"AWAY";});
             }
         }
         else {
             NSLog(@"-----");
+            dispatch_async(dispatch_get_main_queue(), ^ {parent.label_Gesture.text = @"STATIONARY";});
         }
+        
         
         
     /*
@@ -538,14 +582,38 @@ RingBuffer *ringBuff;
     else {
         NSLog(@"Frequency Tone Changed");
         
-        if(self.throwAwayCount == kThrowAway) {
+        if(self.throwAwayCount == kThrowAway + kCalibrate) {
             self.throwAwayCount = 0;
         }
         
         self.throwAwayCount++;
         
-        for(int i=0; i<kSubSetLength; i++) {
-            self.fftMagnitudeBufferSubsetBaseline[i] = self.fftMagnitudeBufferSubset[i];
+        if(self.throwAwayCount > kThrowAway) {
+            for(int i=0; i<kSubSetLength; i++) {
+                self.fftMagnitudeBufferSubsetBaseline[i] = self.fftMagnitudeBufferSubset[i];
+            }
+            
+            if(self.throwAwayCount <= kThrowAway + kCalibrate) {
+                float max = 0;
+                for(int j=0; j<kSubSetLength/2; j++) {
+                    if(self.fftMagnitudeBufferSubset[j] > max) {
+                        max = self.fftMagnitudeBufferSubset[j];
+                    }
+                }
+                self.leftThreshold += max;
+                
+                max = 0;
+                for(int j=kSubSetLength/2 + 3; j<kSubSetLength; j++) {
+                    if(self.fftMagnitudeBufferSubset[j] > max) {
+                        max = self.fftMagnitudeBufferSubset[j];
+                    }
+                }
+                self.rightThreshold +=max;
+            }
+            if(self.throwAwayCount == kThrowAway + kCalibrate) {
+                self.leftThreshold /= kCalibrate;
+                self.rightThreshold /= kCalibrate;
+            }
         }
     }
     
@@ -559,6 +627,18 @@ RingBuffer *ringBuff;
         
     }
     
+}
+
+-(void)convertToDecibels{
+    
+    for(int i = 0; i < kBufferLength/2; i++){
+        self.fftMagnitudeBufferAvg[i] = 20 * log10f(self.fftMagnitudeBufferAvg[i]);
+    }
+    
+}
+
+-(void)reCalibrate {
+    self.throwAwayCount = 0;
 }
 
 /*

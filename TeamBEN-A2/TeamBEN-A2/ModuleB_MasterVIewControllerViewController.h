@@ -14,11 +14,15 @@
 @interface ModuleB_MasterVIewControllerViewController : UIViewController
 {
     void (^_frequencyHandler)(int freq);
+    int (^_motionHandler)(void);
 }
 
 //@property (weak, nonatomic) IBOutlet UILabel *label_Frequency;
 
 - (void) getFrequencyHandler:(void(^)(int))handler;
+
+@property (weak, nonatomic) IBOutlet UILabel *label_Gesture;
+
 
 
 @end

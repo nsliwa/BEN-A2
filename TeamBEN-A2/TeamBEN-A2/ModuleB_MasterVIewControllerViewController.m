@@ -14,13 +14,15 @@
 @interface ModuleB_MasterVIewControllerViewController ()
 // UI properties
 @property (weak, nonatomic) IBOutlet UILabel *label_Frequency;
-@property (weak, nonatomic) IBOutlet UILabel *label_Gesture;
+//@property (weak, nonatomic) IBOutlet UILabel *label_Gesture;
 
 @property (weak, nonatomic) IBOutlet UISlider *slider_Frequency;
 
 @property (weak, nonatomic) IBOutlet UIView *container_GLKView;
 
 @property (strong, nonatomic) Novocaine *audioManager;
+
+@property (strong, nonatomic) ModuleB_embeddedFrequencyViewController *embed;
 
 @end
 
@@ -58,8 +60,8 @@ float frequencyTone;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"Segue_EmbeddedGLK"]) {
-        ModuleB_embeddedFrequencyViewController *embed = segue.destinationViewController;
-        embed.outputFrequency = frequencyTone;
+        self.embed = segue.destinationViewController;
+        self.embed.outputFrequency = frequencyTone;
     }
 }
 
@@ -132,6 +134,9 @@ float frequencyTone;
     
     // Clean up.
     _frequencyHandler = nil;
+}
+- (IBAction)didClickCalibrate:(id)sender {
+    [self.embed reCalibrate];
 }
 
 /*
