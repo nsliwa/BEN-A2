@@ -29,6 +29,7 @@
 //#define kdf 44100/kBufferLength
 #define kSubSetLength 25
 #define kArchiveLength 10
+#define kThrowAway 20
 
 
 @interface ModuleB_embeddedFrequencyViewController ()
@@ -65,6 +66,8 @@
 
 @property (strong, nonatomic)NSMutableArray *fftVariance_left;
 @property (strong, nonatomic)NSMutableArray *fftVariance_right;
+
+@property (nonatomic)int throwAwayCount;
 /*
  @property (nonatomic)float *dilationLocalMaxFrequency;
  @property (nonatomic)float *localMaximums;
@@ -203,6 +206,12 @@ RingBuffer *ringBuff;
     return _outputFrequencyPrevious;
 }
 
+-(int) throwAwayCount {
+    if(!_throwAwayCount)
+        _throwAwayCount = 0;
+    return _throwAwayCount;
+}
+
 /*
 - (IBAction)didUpdateFrequency:(id)sender {
     UISlider *slider = (UISlider *)sender;
@@ -246,6 +255,7 @@ RingBuffer *ringBuff;
 
 #pragma mark - unloading and dealloc
 -(void) viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
     // stop opengl from running
     self.graphHelper->tearDownGL();
     [self.audioManager pause];
@@ -346,7 +356,7 @@ RingBuffer *ringBuff;
     //self.graphHelper->setGraphData(1,self.fftMagnitudeBuffer2,kBufferLength/8,sqrt(kBufferLength));
     //self.graphHelper->setGraphData(2,self.fftMagnitudeBuffer3,kBufferLength/8,sqrt(kBufferLength));
     
-    if(self.outputFrequency == self.outputFrequencyPrevious)
+    if(self.outputFrequency == self.outputFrequencyPrevious && self.throwAwayCount == kThrowAway)
     {
         int nNearestFreq = kSubSetLength / 2;
         
@@ -514,7 +524,13 @@ RingBuffer *ringBuff;
          
     }
     else {
-        //NSLog(@"Frequency Tone Changed");
+        NSLog(@"Frequency Tone Changed");
+        
+        if(self.throwAwayCount == kThrowAway) {
+            self.throwAwayCount = 0;
+        }
+        
+        self.throwAwayCount++;
         
         for(int i=0; i<kSubSetLength; i++) {
             self.fftMagnitudeBufferSubsetBaseline[i] = self.fftMagnitudeBufferSubset[i];

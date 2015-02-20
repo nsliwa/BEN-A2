@@ -126,6 +126,7 @@ RingBuffer *ringBuffer;
 
 #pragma mark - unloading and dealloc
 -(void) viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
     // stop opengl from running
     self.graphHelper->tearDownGL();
     [self.audioManager pause];
