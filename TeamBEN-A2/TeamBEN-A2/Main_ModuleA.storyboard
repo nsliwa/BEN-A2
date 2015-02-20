@@ -125,7 +125,7 @@
         <!--GLKit View Controller-->
         <scene sceneID="saG-qd-gnK">
             <objects>
-                <glkViewController preferredFramesPerSecond="30" id="UXO-23-HQq" sceneMemberID="viewController">
+                <glkViewController preferredFramesPerSecond="30" id="UXO-23-HQq" customClass="ModuleA_PianoToneController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8Co-Yc-sZF"/>
                         <viewControllerLayoutGuide type="bottom" id="lEW-Od-L2J"/>
@@ -133,10 +133,27 @@
                     <glkView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" enableSetNeedsDisplay="NO" id="9fL-k6-Ej8">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Note:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sex-yF-dG2">
+                                <rect key="frame" x="50" y="53" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jS0-fn-nYL">
+                                <rect key="frame" x="100" y="53" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <connections>
                             <outlet property="delegate" destination="UXO-23-HQq" id="CLd-D1-x3m"/>
                         </connections>
                     </glkView>
+                    <connections>
+                        <outlet property="noteLabel" destination="jS0-fn-nYL" id="7iG-Is-S1n"/>
+                    </connections>
                 </glkViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bye-9H-Kco" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

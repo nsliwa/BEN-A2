@@ -35,6 +35,8 @@
 @property (nonatomic)float *dilationLocalMaxFrequencyPiano;
 @property (nonatomic)float *localMaximumsPiano;
 
+@property (weak, nonatomic) IBOutlet UILabel *noteLabel;
+
 @end
 
 @implementation ModuleA_PianoToneController
@@ -172,6 +174,107 @@ RingBuffer *ringBufferPiano;
 #pragma mark - status bar
 -(BOOL)prefersStatusBarHidden{
     return YES;
+}
+
+-(void)findMaxUsingDilation{
+    
+    float max = 0.0;
+    float secondMax = 0.0;
+    float tempMax = 0.0;
+    int tempMaxIndex = 0;
+    int maxIndex = 0;
+    int maxIndex2 = 0;
+    
+    int interpolatedMax;
+    int interpolatedMax2;
+    
+    //Turn to decibels and look for max using dilation
+    for(int i = 0; i < kBufferLength/2; i++){
+        
+        self.fftMagnitudeBufferPiano[i] = 20 * log10f(self.fftMagnitudeBufferPiano[i]);
+        
+        for(int j = 0; j < kWindowLength; j++){
+            
+            if(self.fftMagnitudeBufferPiano[i+j] >= tempMax && self.fftMagnitudeBufferPiano[i+j] > 30){
+                tempMax = self.fftMagnitudeBufferPiano[i+j];
+                tempMaxIndex = j;
+                
+            }
+            
+        }
+        
+        
+        if(tempMaxIndex == kWindowLength/2){
+            
+            if(tempMax >= max){
+                secondMax = max;
+                maxIndex2 = maxIndex;
+                max = tempMax;
+                maxIndex = tempMaxIndex + i;
+            }else if(tempMax >= secondMax){
+                secondMax = tempMax;
+                maxIndex2 = tempMaxIndex + i;
+            }
+        }
+        
+        tempMax = 0.0;
+        
+    }
+    if(maxIndex != 0 && maxIndex2 != 0){
+        
+        interpolatedMax = [self peakInterpolation:(maxIndex)];
+        interpolatedMax2 = [self peakInterpolation:(maxIndex2)];
+        
+        NSLog(@"1st max: %d at %d \n 2nd max: %d at %d", interpolatedMax, maxIndex, interpolatedMax2, maxIndex2);
+        //self.firstFrequency.text = [NSString stringWithFormat:@"1st frequency: %d",interpolatedMax];
+        //self.secondFrequency.text = [NSString stringWithFormat:@"2nd frequency: %d",interpolatedMax2];
+        self.noteLabel.text = [self determineNote:(interpolatedMax)];
+        
+    }
+}
+
+
+
+-(int)peakInterpolation: (int) index{
+    
+    int f2 = index*kdf;
+    
+    float m3 = self.fftMagnitudeBufferPiano[index+1];
+    float m2 = self.fftMagnitudeBufferPiano[index];
+    float m1 = self.fftMagnitudeBufferPiano[index-1];
+    
+    //int interpolated = f2 + ((m3-m2)/(2*m2-m1-m2))*(kdf/2);
+    int interpolated = f2 + ((m3 - m1)/(2*m2 - m1 - m3))*(kdf/2);
+    
+    //NSLog(@"Interpolated %d to %d ", old, interpolated);
+    
+    return interpolated;
+    
+}
+
+-(NSString*)determineNote: (int) frequency{
+    
+    NSString* note;
+    
+    if (frequency >= 0 && frequency < 110.000)
+        note = @"Note is below threshold";
+    else if (frequency >= 110.00 && frequency < 116.54)
+        note = @"A2";
+    else if (frequency >= 116.54 && frequency < 123.47)
+        note = @"A#2";
+    else if (frequency >= 123.47 && frequency < 130.81)
+        note = @"B2";
+    else if (frequency >= 130.81 && frequency < 138.59)
+        note = @"C3";
+    else if (frequency >= 138.59 && frequency < 146.83)
+        note = @"C#3";
+    else if (frequency >= 146.83 && frequency < 155.56)
+        note = @"D3";
+    else
+        note = @"Note is above threshold";
+    
+    return note;
+
 }
 
 
