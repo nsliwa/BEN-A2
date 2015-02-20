@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <GLKit/GLKit.h>
 
-@interface ModuleA_PianoToneController : UIViewController
+@interface ModuleA_PianoToneController : GLKViewController
 
 @end
