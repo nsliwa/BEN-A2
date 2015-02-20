@@ -25,6 +25,8 @@
 		ADB724E11A8C3CE400EBCB0C /* ModuleB_MasterVIewControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB724E01A8C3CE400EBCB0C /* ModuleB_MasterVIewControllerViewController.m */; };
 		ADB724E41A8C44FE00EBCB0C /* ModuleA_MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB724E31A8C44FE00EBCB0C /* ModuleA_MasterViewController.m */; };
 		ADB724E71A8C631100EBCB0C /* Piano.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADB724E61A8C631100EBCB0C /* Piano.storyboard */; };
+		ADF5B35C1A9752E400E84229 /* ModuleB_RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADF5B35B1A9752E400E84229 /* ModuleB_RootViewController.m */; };
+		ADF5B35F1A9753C000E84229 /* ModuleB_TwisterViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = ADF5B35E1A9753C000E84229 /* ModuleB_TwisterViewController.mm */; };
 		EFC2B2291A9039A600672C57 /* FrequenciesViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EFC2B2281A9039A600672C57 /* FrequenciesViewController.mm */; };
 		EFC2B22B1A90451500672C57 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFC2B22A1A90451500672C57 /* GLKit.framework */; };
 		EFC2B22D1A90451D00672C57 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFC2B22C1A90451D00672C57 /* CoreGraphics.framework */; };
@@ -77,6 +79,10 @@
 		ADB724E31A8C44FE00EBCB0C /* ModuleA_MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleA_MasterViewController.m; sourceTree = "<group>"; };
 		ADB724E61A8C631100EBCB0C /* Piano.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Piano.storyboard; sourceTree = "<group>"; };
 		ADB724E81A8C656000EBCB0C /* ModuleA_PianoToneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleA_PianoToneController.h; sourceTree = "<group>"; };
+		ADF5B35A1A9752E400E84229 /* ModuleB_RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleB_RootViewController.h; sourceTree = "<group>"; };
+		ADF5B35B1A9752E400E84229 /* ModuleB_RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleB_RootViewController.m; sourceTree = "<group>"; };
+		ADF5B35D1A9753C000E84229 /* ModuleB_TwisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleB_TwisterViewController.h; sourceTree = "<group>"; };
+		ADF5B35E1A9753C000E84229 /* ModuleB_TwisterViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ModuleB_TwisterViewController.mm; sourceTree = "<group>"; };
 		EFC2B2251A90373C00672C57 /* SMUFFTHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMUFFTHelper.h; sourceTree = "<group>"; };
 		EFC2B2261A90374400672C57 /* SMUGraphHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMUGraphHelper.h; sourceTree = "<group>"; };
 		EFC2B2271A9039A600672C57 /* FrequenciesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrequenciesViewController.h; sourceTree = "<group>"; };
@@ -225,6 +231,10 @@
 				ADB724E01A8C3CE400EBCB0C /* ModuleB_MasterVIewControllerViewController.m */,
 				AD71EEFC1A95570C00782DAD /* ModuleB_embeddedFrequencyViewController.h */,
 				AD71EEFD1A95570C00782DAD /* ModuleB_embeddedFrequencyViewController.mm */,
+				ADF5B35A1A9752E400E84229 /* ModuleB_RootViewController.h */,
+				ADF5B35B1A9752E400E84229 /* ModuleB_RootViewController.m */,
+				ADF5B35D1A9753C000E84229 /* ModuleB_TwisterViewController.h */,
+				ADF5B35E1A9753C000E84229 /* ModuleB_TwisterViewController.mm */,
 			);
 			name = ModuleB;
 			sourceTree = "<group>";
@@ -333,6 +343,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADF5B35F1A9753C000E84229 /* ModuleB_TwisterViewController.mm in Sources */,
 				ADB724C71A8C25E800EBCB0C /* AudioFileReader.mm in Sources */,
 				ADB724E11A8C3CE400EBCB0C /* ModuleB_MasterVIewControllerViewController.m in Sources */,
 				ADB7249A1A8C20F200EBCB0C /* AppDelegate.m in Sources */,
@@ -340,6 +351,7 @@
 				ADB724CC1A8C25F300EBCB0C /* RingBuffer.mm in Sources */,
 				EFC2B2291A9039A600672C57 /* FrequenciesViewController.mm in Sources */,
 				AD71EEFE1A95570C00782DAD /* ModuleB_embeddedFrequencyViewController.mm in Sources */,
+				ADF5B35C1A9752E400E84229 /* ModuleB_RootViewController.m in Sources */,
 				49602EB41A96BECB007BC121 /* ModuleA_PianoToneController.mm in Sources */,
 				ADB724C81A8C25E800EBCB0C /* AudioFileWriter.m in Sources */,
 				ADB724C91A8C25E800EBCB0C /* Novocaine.m in Sources */,

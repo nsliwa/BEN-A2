@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TeamBEN-A2/ModuleB_embeddedFrequencyViewController.mm"
-            timestampString = "446121774.836506"
+            timestampString = "446147180.567574"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "598"
-            endingLineNumber = "598"
+            startingLineNumber = "612"
+            endingLineNumber = "612"
             landmarkName = "-update"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TeamBEN-A2/ModuleB_embeddedFrequencyViewController.mm"
-            timestampString = "446121774.836506"
+            timestampString = "446147180.567574"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "613"
-            endingLineNumber = "613"
+            startingLineNumber = "627"
+            endingLineNumber = "627"
             landmarkName = "-update"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TeamBEN-A2/ModuleB_embeddedFrequencyViewController.mm"
-            timestampString = "446121774.836506"
+            timestampString = "446147180.567574"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "614"
-            endingLineNumber = "614"
+            startingLineNumber = "628"
+            endingLineNumber = "628"
             landmarkName = "-update"
             landmarkType = "5">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TeamBEN-A2/ModuleB_embeddedFrequencyViewController.mm"
-            timestampString = "446121774.836506"
+            timestampString = "446147180.567574"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "603"
-            endingLineNumber = "603"
+            startingLineNumber = "617"
+            endingLineNumber = "617"
             landmarkName = "-update"
             landmarkType = "5">
          </BreakpointContent>

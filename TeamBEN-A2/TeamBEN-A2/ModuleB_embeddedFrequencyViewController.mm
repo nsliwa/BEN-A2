@@ -18,28 +18,25 @@
 #import <math.h>
 
 #define kSamplingRate 44100.00 //Hz
-#define kBufferLength 8192//4096 //14700 needed to get within +/- 3 Hz accuracy
+#define kBufferLength 8192//4096
 #define kSpectrumLength kBufferLength/2
 #define kdf kSamplingRate/kBufferLength
 
 #define kframesPerSecond 30
 #define knumDataArraysToGraph 2
-#define kWindowLength 50
-#define kNumOfMaximums 2
-//#define kdf 44100/kBufferLength
 #define kSubSetLength 25
-#define kArchiveLength 10
 #define kThrowAway 20
 #define kCalibrate 20
 
 
 @interface ModuleB_embeddedFrequencyViewController ()
+/*
 // UI properties
 @property (weak, nonatomic) IBOutlet UILabel *label_Frequency;
 @property (weak, nonatomic) IBOutlet UILabel *label_Gesture;
 
 @property (weak, nonatomic) IBOutlet UISlider *slider_Frequency;
-
+*/
 
 // Audio Processing properties
 @property (strong, nonatomic) Novocaine *audioManager;
@@ -74,6 +71,8 @@
 // idea for "ideal threshold" from Jarret Shook
 @property (nonatomic)float leftThreshold;
 @property (nonatomic)float rightThreshold;
+
+@property (nonatomic)int gesturePrevious;
 /*
  @property (nonatomic)float *dilationLocalMaxFrequency;
  @property (nonatomic)float *localMaximums;
@@ -228,6 +227,12 @@ RingBuffer *ringBuff;
     if(!_rightThreshold)
         _rightThreshold = 0;
     return _rightThreshold;
+}
+
+-(int) gesturePrevious {
+    if(!_gesturePrevious)
+        _gesturePrevious = 0;
+    return _gesturePrevious;
 }
 
 /*
@@ -453,17 +458,26 @@ RingBuffer *ringBuff;
         
         if(self.fftMagnitudeBufferSubsetDifference[maxIdx] > 4) {
             if(maxIdx > kSubSetLength/2 +2) {
-                NSLog(@"TOWARD");
-                dispatch_async(dispatch_get_main_queue(), ^ {parent.label_Gesture.text = @"TOWARD";});
+                if(self.gesturePrevious == 1) {
+                    NSLog(@"TOWARD");
+                    dispatch_async(dispatch_get_main_queue(), ^ {parent.label_Gesture.text = @"TOWARD";});
+                }
+                self.gesturePrevious = 1;
             }
             else if(maxIdx < kSubSetLength/2 -2) {
-                NSLog(@"AWAY");
-                dispatch_async(dispatch_get_main_queue(), ^ {parent.label_Gesture.text = @"AWAY";});
+                if(self.gesturePrevious == -1) {
+                    NSLog(@"AWAY");
+                    dispatch_async(dispatch_get_main_queue(), ^ {parent.label_Gesture.text = @"AWAY";});
+                }
+                self.gesturePrevious = -1;
             }
         }
         else {
-            NSLog(@"-----");
-            dispatch_async(dispatch_get_main_queue(), ^ {parent.label_Gesture.text = @"STATIONARY";});
+            if(self.gesturePrevious == 0) {
+                NSLog(@"-----");
+                dispatch_async(dispatch_get_main_queue(), ^ {parent.label_Gesture.text = @"STATIONARY";});
+            }
+            self.gesturePrevious = 0;
         }
         
         

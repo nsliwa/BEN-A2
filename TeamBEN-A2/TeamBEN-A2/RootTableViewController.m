@@ -87,8 +87,8 @@
         NSLog(@"found storyboard b");
         controller = [storyBoard instantiateViewControllerWithIdentifier:
                     //@"ModuleB_NavigationController"];
-                    @"ModuleB_MasterViewController"];
-        NSLog(@"ModuleB_MasterViewController");
+                    @"ModuleB_RootViewController"];
+        NSLog(@"ModuleB_RootViewController");
         
         [self.navigationController pushViewController:controller animated:YES];
         //[controller setModalPresentationStyle:UIModalPresentationFullScreen];

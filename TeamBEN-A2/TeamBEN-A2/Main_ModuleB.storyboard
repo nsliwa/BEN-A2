@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -121,5 +122,120 @@
             </objects>
             <point key="canvasLocation" x="1383" y="251"/>
         </scene>
+        <!--ModuleB Root View Controller-->
+        <scene sceneID="JVn-wV-o3l">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dia-ND-gCc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="ModuleB_RootViewController" id="InI-oc-quH" customClass="ModuleB_RootViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aGZ-Pw-n03"/>
+                        <viewControllerLayoutGuide type="bottom" id="1m5-qm-whU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6gK-hs-0ky">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pTh-6c-mCo">
+                                <rect key="frame" x="247" y="337" width="106" height="30"/>
+                                <state key="normal" title="Twister Spinner">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="155" y="337" width="90" height="30"/>
+                                </variation>
+                                <connections>
+                                    <segue destination="Ki4-we-MhQ" kind="show" id="Gmu-tI-XFC"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9jW-25-9Iq">
+                                <rect key="frame" x="238" y="186" width="124" height="30"/>
+                                <state key="normal" title="Gesture Detection">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="133" y="208" width="134" height="30"/>
+                                </variation>
+                                <connections>
+                                    <segue destination="mfk-aI-If1" kind="show" id="08P-Gb-dwM"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="pTh-6c-mCo" secondAttribute="centerY" constant="-52" id="MxY-Jx-sG4"/>
+                            <constraint firstAttribute="centerX" secondItem="9jW-25-9Iq" secondAttribute="centerX" id="Vtp-C2-lEy"/>
+                            <constraint firstItem="pTh-6c-mCo" firstAttribute="top" secondItem="9jW-25-9Iq" secondAttribute="bottom" constant="99" id="Z9Y-pa-nnv"/>
+                            <constraint firstAttribute="centerY" secondItem="9jW-25-9Iq" secondAttribute="centerY" constant="99" id="aSm-Io-dPw"/>
+                            <constraint firstAttribute="centerX" secondItem="9jW-25-9Iq" secondAttribute="centerX" id="jo7-7y-ZnO"/>
+                            <constraint firstItem="9jW-25-9Iq" firstAttribute="top" secondItem="aGZ-Pw-n03" secondAttribute="bottom" constant="188" id="lDy-qC-tOu"/>
+                            <constraint firstAttribute="centerX" secondItem="pTh-6c-mCo" secondAttribute="centerX" id="n5w-Ng-5nJ"/>
+                            <constraint firstItem="9jW-25-9Iq" firstAttribute="leading" secondItem="6gK-hs-0ky" secondAttribute="leadingMargin" constant="217" id="qaI-fA-x2n"/>
+                            <constraint firstAttribute="centerX" secondItem="pTh-6c-mCo" secondAttribute="centerX" id="zdN-Yr-AFf"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="lDy-qC-tOu"/>
+                                <exclude reference="qaI-fA-x2n"/>
+                                <exclude reference="Z9Y-pa-nnv"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="iIi-Zf-Zfm"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-4" y="236"/>
+        </scene>
+        <!--ModuleB Twister View Controller-->
+        <scene sceneID="q3X-hs-4C7">
+            <objects>
+                <viewController storyboardIdentifier="ModuleB_TwisterViewController" id="Ki4-we-MhQ" customClass="ModuleB_TwisterViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TdD-Q3-E67"/>
+                        <viewControllerLayoutGuide type="bottom" id="Cre-86-PAV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cmM-zI-Nsd" customClass="GLKView">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="twisterBoard" translatesAutoresizingMaskIntoConstraints="NO" id="Jjz-xA-7mx">
+                                <rect key="frame" x="0.0" y="44" width="512" height="512"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="arrow-1" translatesAutoresizingMaskIntoConstraints="NO" id="M2p-zm-VAC">
+                                <rect key="frame" x="226" y="124" width="60" height="78"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="M2p-zm-VAC" secondAttribute="height" multiplier="10:13" id="lya-bq-NMj"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Jjz-xA-7mx" firstAttribute="leading" secondItem="cmM-zI-Nsd" secondAttribute="leadingMargin" constant="28" id="9dZ-Sd-hta"/>
+                            <constraint firstItem="M2p-zm-VAC" firstAttribute="centerX" secondItem="Jjz-xA-7mx" secondAttribute="centerX" id="HAl-oL-Ies"/>
+                            <constraint firstItem="M2p-zm-VAC" firstAttribute="top" secondItem="TdD-Q3-E67" secondAttribute="bottom" constant="104" id="HcO-eZ-hcb"/>
+                            <constraint firstItem="Jjz-xA-7mx" firstAttribute="width" secondItem="cmM-zI-Nsd" secondAttribute="width" id="J50-bQ-J7j"/>
+                            <constraint firstItem="Jjz-xA-7mx" firstAttribute="centerY" secondItem="cmM-zI-Nsd" secondAttribute="centerY" id="N2b-2h-IMJ"/>
+                            <constraint firstItem="Jjz-xA-7mx" firstAttribute="top" secondItem="M2p-zm-VAC" secondAttribute="bottom" constant="-158" id="NTB-Fa-Aau"/>
+                            <constraint firstItem="Jjz-xA-7mx" firstAttribute="top" secondItem="TdD-Q3-E67" secondAttribute="bottom" constant="24" id="bHX-jn-aBm"/>
+                            <constraint firstItem="Jjz-xA-7mx" firstAttribute="leading" secondItem="cmM-zI-Nsd" secondAttribute="leading" id="mWs-Cp-icA"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="9dZ-Sd-hta"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="image_dial" destination="M2p-zm-VAC" id="5c5-xc-UbS"/>
+                        <outlet property="image_spinner" destination="Jjz-xA-7mx" id="cBB-oL-LE8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VcZ-Pj-JAH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="216" y="1002"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="arrow-1" width="150" height="195"/>
+        <image name="twisterBoard" width="1024" height="1024"/>
+    </resources>
 </document>
