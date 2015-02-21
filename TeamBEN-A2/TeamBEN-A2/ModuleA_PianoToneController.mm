@@ -258,24 +258,37 @@ RingBuffer *ringBufferPiano;
     
     if ( ((max1 >= 438 && max1 <= 442) && (max2 >= 218 && max2 <= 220)) ||
         ((max2 >= 438 && max2 <= 442) && (max1 >= 218 && max1 <= 220)) )
-        note = @"A2";
+            note = @"A2";
     else if ( ((max1 >= 463 && max1 <= 467) && (max2 >= 230 && max2 <= 234)) ||
         ((max2 >= 463 && max2 <= 467) && (max1 >= 230 && max1 <= 234)) )
-        note = @"A#2";
-    else if ( ((max1 >= 491 && max1 <= 494) && (max2 >= 262 && max2 <= 266)) ||
-        ((max2 >= 491 && max2 <= 494) && (max1 >= 262 && max1 <= 266)) )
-        note = @"B2";
+            note = @"A#2";
+    else if ( ((max1 >= 491 && max1 <= 496) && (max2 >= 242 && max2 <= 248)) ||
+        ((max2 >= 491 && max2 <= 496) && (max1 >= 242 && max1 <= 248)) )
+            note = @"B2";
     else if ( ((max1 >= 521 && max1 <= 525) && (max2 >= 259 && max2 <= 263)) ||
         ((max2 >= 521 && max2 <= 525) && (max1 >= 259 && max1 <= 263)) )
-        note = @"C2";
+            note = @"C2";
     else if ( ((max1 >= 552 && max1 <= 556) && (max2 >= 274 && max2 <= 278)) ||
         ((max2 >= 552 && max2 <= 556) && (max1 >= 274 && max1 <= 278)) )
-        note = @"C#2";
+            note = @"C#2";
     else if ( ((max1 >= 584 && max1 <= 588) && (max2 >= 291 && max2 <= 295)) ||
         ((max2 >= 584 && max2 <= 588) && (max1 >= 291 && max1 <= 295)) )
-        note = @"A2";/*
-    else if (frequency >= 146.83 && frequency < 155.56)
-        note = @"D3";*/
+            note = @"D2";
+    else if ( ((max1 >= 621 && max1 <= 627) && (max2 >= 304 && max2 <= 313)) ||
+        ((max2 >= 621 && max2 <= 627) && (max1 >= 304 && max1 <= 313)) )
+            note = @"D#2";
+    else if ( ((max1 >= 696 && max1 <= 698) && (max2 >= 345 && max2 <= 348)) ||
+             ((max2 >= 696 && max2 <= 698) && (max1 >= 345 && max1 <= 348)) )
+            note = @"F3";
+    else if ( ((max1 >= 735 && max1 <= 740) && (max2 >= 366 && max2 <= 372)) ||
+             ((max2 >= 735 && max2 <= 740) && (max1 >= 366 && max1 <= 372)) )
+            note = @"F#3";
+    else if ( ((max1 >= 1247 && max1 <= 1250) && (max2 >= 410 && max2 <= 348)) ||
+             ((max2 >= 1247 && max2 <= 1250) && (max1 >= 410 && max1 <= 348)) )
+            note = @"G3";
+    else if ( ((max1 >= 1321 && max1 <= 1325) && (max2 >= 436 && max2 <= 442)) ||
+             ((max2 >= 1321 && max2 <= 1325) && (max1 >= 436 && max1 <= 442)) )
+            note = @"A3";
     else
         note = @"Not yet recognized";
     
