@@ -18,7 +18,7 @@
 #define kBufferLength 8192 //14700 //4096
 #define kframesPerSecond 30
 #define knumDataArraysToGraph 1
-#define kWindowLength 10
+#define kWindowLength 9
 #define kNumOfMaximums 2
 #define kdf kSamplingRate/kBufferLength
 
@@ -221,7 +221,7 @@ RingBuffer *ringBuffer;
         }
         
         
-        if(tempMaxIndex == kWindowLength/2){
+        if(tempMaxIndex == 4){
             
             if(tempMax >= max){
                 secondMax = max;

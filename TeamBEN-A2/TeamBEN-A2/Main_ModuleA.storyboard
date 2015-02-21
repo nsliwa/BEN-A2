@@ -82,32 +82,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="2nd frequency:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mmO-sw-Tpy">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2nd frequency:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mmO-sw-Tpy">
                                 <rect key="frame" x="63" y="133" width="474" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="1st frequency:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zhk-2V-En1">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1st frequency:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zhk-2V-En1">
                                 <rect key="frame" x="63" y="63" width="474" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="474" id="6Lt-Dq-mE9"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="zhk-2V-En1" secondAttribute="trailing" constant="55" id="6gE-5V-aEI"/>
-                            <constraint firstItem="zhk-2V-En1" firstAttribute="leading" secondItem="fCP-lf-1CU" secondAttribute="leadingMargin" constant="55" id="9w1-Bf-afG"/>
-                            <constraint firstItem="zhk-2V-En1" firstAttribute="leading" secondItem="mmO-sw-Tpy" secondAttribute="leading" id="C7K-t0-kAY"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="mmO-sw-Tpy" secondAttribute="trailing" constant="55" id="T8U-gg-OlL"/>
-                            <constraint firstItem="mmO-sw-Tpy" firstAttribute="top" secondItem="zhk-2V-En1" secondAttribute="bottom" constant="49" id="fcD-mh-0f2"/>
-                            <constraint firstItem="zhk-2V-En1" firstAttribute="trailing" secondItem="mmO-sw-Tpy" secondAttribute="trailing" id="gz7-Io-bZz"/>
-                            <constraint firstItem="zhk-2V-En1" firstAttribute="centerX" secondItem="fCP-lf-1CU" secondAttribute="centerX" id="mIF-Dn-PIi"/>
-                            <constraint firstItem="zhk-2V-En1" firstAttribute="top" secondItem="dbJ-fs-0lv" secondAttribute="bottom" constant="43" id="rfa-Nn-O5V"/>
-                            <constraint firstItem="mmO-sw-Tpy" firstAttribute="leading" secondItem="fCP-lf-1CU" secondAttribute="leadingMargin" constant="55" id="xid-QV-Xdq"/>
+                            <constraint firstItem="mmO-sw-Tpy" firstAttribute="leading" secondItem="zhk-2V-En1" secondAttribute="leading" id="3od-xQ-azB"/>
+                            <constraint firstItem="zhk-2V-En1" firstAttribute="leading" secondItem="fCP-lf-1CU" secondAttribute="leadingMargin" constant="47" id="E89-mX-jJw"/>
+                            <constraint firstItem="mmO-sw-Tpy" firstAttribute="trailing" secondItem="zhk-2V-En1" secondAttribute="trailing" id="PUh-hF-z6k"/>
+                            <constraint firstItem="zhk-2V-En1" firstAttribute="centerX" secondItem="fCP-lf-1CU" secondAttribute="centerX" id="eZ3-Ie-W2U"/>
+                            <constraint firstItem="mmO-sw-Tpy" firstAttribute="top" secondItem="zhk-2V-En1" secondAttribute="bottom" constant="49" id="l94-2b-3Ip"/>
+                            <constraint firstItem="zhk-2V-En1" firstAttribute="top" secondItem="dbJ-fs-0lv" secondAttribute="bottom" constant="43" id="ou4-sX-sPG"/>
                         </constraints>
                         <connections>
                             <outlet property="delegate" destination="4pR-8j-Fwp" id="RJ3-mP-4mf"/>
