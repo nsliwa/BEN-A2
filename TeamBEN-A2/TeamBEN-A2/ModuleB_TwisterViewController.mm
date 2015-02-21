@@ -24,6 +24,7 @@
 #define kSubSetLength 25
 #define kThrowAway 20
 #define kCalibrate 20
+#define kArchive 4
 
 #define kFrequency 17500.00
 
@@ -61,15 +62,20 @@
 @property (nonatomic)float leftThreshold;
 @property (nonatomic)float rightThreshold;
 
-@property (nonatomic)int gesturePrevious;
+@property (strong, nonatomic)NSMutableArray *gesturePrevious;
 
 //@property (strong, nonatomic)NSTimer* updateFFT;
 
 @property (nonatomic)int windupCount;
+@property (nonatomic)int spinCount;
 
 @end
 
 @implementation ModuleB_TwisterViewController
+
+- (IBAction)didClickCalibrate:(id)sender {
+    self.throwAwayCount = 0;
+}
 
 RingBuffer *ringBuffT;
 
@@ -171,9 +177,9 @@ RingBuffer *ringBuffT;
     return _rightThreshold;
 }
 
--(int) gesturePrevious {
+-(NSMutableArray*) gesturePrevious {
     if(!_gesturePrevious)
-        _gesturePrevious = 0;
+        _gesturePrevious = [[NSMutableArray alloc]init];
     return _gesturePrevious;
 }
 
@@ -223,54 +229,64 @@ RingBuffer *ringBuffT;
                                    userInfo:nil
                                     repeats:YES];
     */
-    /*
-    [self runSpinAnimationOnView:self.image_spinner duration:.0625 rotations:1 repeat:1];
-    [self runSpinAnimationOnView:self.image_spinner duration:.125 rotations:1 repeat:1];
-    [self runSpinAnimationOnView:self.image_spinner duration:.1875 rotations:1 repeat:1];
-    */
-    /*
-    [NSTimer scheduledTimerWithTimeInterval:5
-                                                      target:self
-                                                    selector:@selector(sleep)
-                                                    userInfo:nil
-                                                     repeats:NO];
-    */
-    //[self runSpinAnimationOnView:self.image_spinner duration:1 rotations:.5 repeat:1];
     
     
+    UIBarButtonItem *calibrateButton = [[UIBarButtonItem alloc]
+                                   initWithTitle:@"Calibrate"
+                                   style:UIBarButtonItemStylePlain
+                                   target:self
+                                   action:@selector(didClickCalibrate:)];
+    self.navigationItem.rightBarButtonItem = calibrateButton;
     
 }
 
--(void) sleep {}
 
 - (void) runSpinAnimationOnView:(UIView*)view duration:(CGFloat)duration rotations:(CGFloat)rotations repeat:(float)repeat;
 {
     
-    self.spin += M_PI * 2.0 * rotations * duration;
-    [UIView animateWithDuration:duration
-                          delay:0
-                        options:UIViewAnimationCurveLinear
-                     animations:^{
-                         //CGAffineTransform move = CGAffineTransformMakeTranslation(40, 40);
-                         //CGAffineTransform zoom    = CGAffineTransformMakeScale(1.2, 1.2);
-                         CGAffineTransform transform = CGAffineTransformMakeRotation(M_PI * 2.0 * rotations * duration);
-                         //CGAffineTransformConcat(zoom, move);
-                         self.image_spinner.transform = transform;
-                     }
-                     completion:^(BOOL finished){
-                         NSLog(@"spin: %f, %f", rotations, M_PI * 2.0 * rotations * duration);
-                     }];
+    CGFloat rotationTemp = fmodf(rotations, 16) / 16.0;//(float)(rotations%16)/16.0
     
+    //self.spin += M_PI * 2.0 * rotations * duration;
     /*
-    CABasicAnimation* rotationAnimation;
-    rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-    rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI * 2.0 * rotations * duration ];
-    rotationAnimation.duration = duration;
-    rotationAnimation.cumulative = YES;
-    rotationAnimation.repeatCount = repeat;
-    
-    [view.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+    if(rotations > 0 && repeat > 0 && duration > 0) {
+        [UIView animateWithDuration:1.5//duration
+                              delay:0
+                            options:UIViewAnimationOptionCurveLinear
+                         animations:^{
+                             //CGAffineTransform move = CGAffineTransformMakeTranslation(40, 40);
+                             //CGAffineTransform zoom    = CGAffineTransformMakeScale(1.2, 1.2);
+                             CGAffineTransform transform = CGAffineTransformMakeRotation(M_PI * 2.0 * rotationTemp * repeat);
+                             //CGAffineTransformConcat(zoom, move);
+                             self.image_spinner.transform = transform;
+                         }
+                         completion:^(BOOL finished){
+                             NSLog(@"ANIMATED duration:%f windup:%f rotations:%f repeat:%f transform:%f z-position:%f", duration, rotations, rotationTemp, repeat, M_PI * 2.0 * rotations*repeat, view.layer.zPosition);
+                         }];
+    }
     */
+    
+    NSLog(@"ANIMATING duration:%f windup:%f rotations:%f repeat:%f transform:%f z-position:%f", duration, rotations, rotationTemp, repeat, M_PI * 2.0 * rotations*repeat, view.layer.zPosition);
+    
+    
+    if(rotations > 0 && repeat > 0 && duration > 0) {
+    
+        CABasicAnimation* rotationAnimation;
+        rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+        rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI * 2.0 * rotationTemp * duration ];
+        rotationAnimation.duration = 1;
+        rotationAnimation.cumulative = YES;
+        rotationAnimation.repeatCount = repeat;
+        rotationAnimation.removedOnCompletion = NO;
+        rotationAnimation.fillMode = kCAFillModeForwards;
+        //[view setTransform:[NSValue valueWithCATransform3D:scale4]];
+        
+        [view.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+        
+        NSLog(@"ANIMATING duration:%f windup:%f rotations:%f repeat:%f transform:%f", duration, rotations, rotationTemp, repeat, M_PI * 2.0 * rotations*repeat);
+        
+    }
+    
+    
 }
 
 
@@ -452,38 +468,103 @@ RingBuffer *ringBuffT;
         
         NSLog(@"maxIdx: %d, difference: %f, trueThreshold: %f", maxIdx, self.fftMagnitudeBufferSubsetDifference[maxIdx], 4.0);
         
+        
+        
         if(self.fftMagnitudeBufferSubsetDifference[maxIdx] > 4) {
             if(maxIdx > kSubSetLength/2 +2) {
-                if(self.gesturePrevious == 1) {
-                    NSLog(@"TOWARD: %d", self.windupCount++);
+                if([self.gesturePrevious count] > 1 && [self.gesturePrevious[ [self.gesturePrevious count] -1 ]  isEqual: @1] && [self.gesturePrevious[ [self.gesturePrevious count] - 2]  isEqual: @1]) {
+                    NSLog(@"TOWARD windup: %d", self.windupCount++);
                     dispatch_async(dispatch_get_main_queue(), ^
                     {
                         self.image_spinner.alpha = .5;
                     });
                 }
-                self.gesturePrevious = 1;
+
+                [self.gesturePrevious addObject:@1];
             }
             else if(maxIdx < kSubSetLength/2 -2) {
-                if(self.gesturePrevious == -1) {
-                    NSLog(@"AWAY: %d", self.windupCount);
+                if([self.gesturePrevious count] > 1 && [self.gesturePrevious[ [self.gesturePrevious count] -1 ]  isEqual: @-1] && [self.gesturePrevious[ [self.gesturePrevious count] - 2]  isEqual: @-1]) {
+                    NSLog(@"AWAY spin: %d", self.spinCount++);
                     dispatch_async(dispatch_get_main_queue(), ^
                     {
-                        self.image_spinner.alpha = 1.0;
-                        [self runSpinAnimationOnView:self.image_spinner duration:1/kframesPerSecond rotations:(float)self.windupCount/16.0 repeat:1];
+                        self.image_spinner.alpha = .75;
+                        //[self runSpinAnimationOnView:self.image_spinner duration:1/kframesPerSecond rotations:(float)(self.windupCount%16)/16.0 repeat:1];
                     });
                 }
-                self.gesturePrevious = -1;
+                [self.gesturePrevious addObject:@-1];
             }
         }
         else {
-            if(self.gesturePrevious == 0) {
-                NSLog(@"-----");
+            if([self.gesturePrevious count] > 1 && [self.gesturePrevious[ [self.gesturePrevious count] -1 ]  isEqual: @1] && [self.gesturePrevious[ [self.gesturePrevious count] - 2]  isEqual: @1]) {
+                NSLog(@"----- windup: %d", self.windupCount++);
                 dispatch_async(dispatch_get_main_queue(), ^
-                {
-                    self.image_spinner.alpha = .9;
-                });
+                   {
+                       self.image_spinner.alpha = .5;
+                   });
             }
-            self.gesturePrevious = 0;
+            else if([self.gesturePrevious count] > 1 && [self.gesturePrevious[ [self.gesturePrevious count] -1 ]  isEqual: @-1] && [self.gesturePrevious[ [self.gesturePrevious count] - 2]  isEqual: @-1]) {
+                NSLog(@"----- spin: %d", self.spinCount++);
+                dispatch_async(dispatch_get_main_queue(), ^
+                   {
+                       self.image_spinner.alpha = .75;
+                       //[self runSpinAnimationOnView:self.image_spinner duration:1/kframesPerSecond rotations:(float)(self.windupCount%16)/16.0 repeat:1];
+                   });
+                [self.gesturePrevious addObject:@0];
+            }
+            else if([self.gesturePrevious count] > 1 && [self.gesturePrevious[ [self.gesturePrevious count] -1 ]  isEqual: @0] && [self.gesturePrevious[ [self.gesturePrevious count] - 2]  isEqual: @-1]) {
+                NSLog(@"------ windup: %d spin: %d", self.windupCount, self.spinCount);
+                
+                int tempWindup = self.windupCount;
+                int tempSpin = self.spinCount;
+                
+                dispatch_async(dispatch_get_main_queue(), ^
+                   {
+                       self.image_spinner.alpha = 1;
+                       [self runSpinAnimationOnView:self.image_spinner duration:5 rotations:tempWindup repeat:sqrt(tempSpin)];
+                   });
+                
+                self.windupCount = 0;
+                self.spinCount = 0;
+                
+                [self.gesturePrevious addObject:@0];
+            }
+            else {
+                NSLog(@"-----");
+            }
+
+            
+            /*
+            if([self.gesturePrevious count] > 2) {
+                if( [self.gesturePrevious[ [self.gesturePrevious count] -1 ]  isEqual: @0] && [self.gesturePrevious[ [self.gesturePrevious count] - 2]  isEqual: @0]) {
+                    if([self.gesturePrevious[ [self.gesturePrevious count] -3 ]  isEqual: @-1]) {
+                        NSLog(@"------ windup: %d spin: %d", self.windupCount, self.spinCount);
+                        dispatch_async(dispatch_get_main_queue(), ^
+                                       {
+                                           self.image_spinner.alpha = 1;
+                                           [self runSpinAnimationOnView:self.image_spinner duration:1/kframesPerSecond rotations:(float)(self.windupCount%16)/16.0 repeat:self.spinCount*10];
+                                       });
+                        self.windupCount = 0;
+                        self.spinCount = 0;
+                        
+                        [self.gesturePrevious addObject:@0];
+                    }
+                    else if( [self.gesturePrevious[ [self.gesturePrevious count] -1 ]  isEqual: @-1] && [self.gesturePrevious[ [self.gesturePrevious count] - 2]  isEqual: @-1]) {
+                        NSLog(@"AWAY spin: %d", self.spinCount++);
+                        dispatch_async(dispatch_get_main_queue(), ^
+                           {
+                               self.image_spinner.alpha = .75;
+                               //[self runSpinAnimationOnView:self.image_spinner duration:1/kframesPerSecond rotations:(float)(self.windupCount%16)/16.0 repeat:1];
+                           });
+                    }
+                }
+            }
+             */
+        }
+        
+        
+        if([self.gesturePrevious count] == kArchive) {
+            //NSLog(@"removing object");
+            [self.gesturePrevious removeObjectAtIndex:0];
         }
     }
     else {
