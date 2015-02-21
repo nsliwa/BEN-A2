@@ -226,8 +226,8 @@ RingBuffer *ringBufferPiano;
         NSLog(@"1st max: %d at %d \n 2nd max: %d at %d", interpolatedMax, maxIndex, interpolatedMax2, maxIndex2);
         //self.firstFrequency.text = [NSString stringWithFormat:@"1st frequency: %d",interpolatedMax];
         //self.secondFrequency.text = [NSString stringWithFormat:@"2nd frequency: %d",interpolatedMax2];
-        NSLog(@"Maximum harmonic frequency: %@", [self determineNote:(interpolatedMax)]);
-        self.noteLabel.text = [self determineNote:(interpolatedMax)];
+        NSLog(@"Maximum harmonic frequency: %@", [self determineNote:(interpolatedMax) secondFreq:(interpolatedMax2)]);
+        self.noteLabel.text = [self determineNote:(interpolatedMax) secondFreq:(interpolatedMax2)];
         
     }
 }
@@ -251,26 +251,33 @@ RingBuffer *ringBufferPiano;
     
 }
 
--(NSString*)determineNote: (int) frequency{
+-(NSString*)determineNote: (int) max1
+               secondFreq: (int) max2{
     
     NSString* note;
     
-    if (frequency >= 0 && frequency < 110.000)
-        note = @"Note is below threshold";
-    else if (frequency >= 110.00 && frequency < 116.54)
+    if ( ((max1 >= 438 && max1 <= 442) && (max2 >= 218 && max2 <= 220)) ||
+        ((max2 >= 438 && max2 <= 442) && (max1 >= 218 && max1 <= 220)) )
         note = @"A2";
-    else if (frequency >= 116.54 && frequency < 123.47)
+    else if ( ((max1 >= 463 && max1 <= 467) && (max2 >= 230 && max2 <= 234)) ||
+        ((max2 >= 463 && max2 <= 467) && (max1 >= 230 && max1 <= 234)) )
         note = @"A#2";
-    else if (frequency >= 123.47 && frequency < 130.81)
+    else if ( ((max1 >= 491 && max1 <= 494) && (max2 >= 262 && max2 <= 266)) ||
+        ((max2 >= 491 && max2 <= 494) && (max1 >= 262 && max1 <= 266)) )
         note = @"B2";
-    else if (frequency >= 130.81 && frequency < 138.59)
-        note = @"C3";
-    else if (frequency >= 138.59 && frequency < 146.83)
-        note = @"C#3";
+    else if ( ((max1 >= 521 && max1 <= 525) && (max2 >= 259 && max2 <= 263)) ||
+        ((max2 >= 521 && max2 <= 525) && (max1 >= 259 && max1 <= 263)) )
+        note = @"C2";
+    else if ( ((max1 >= 552 && max1 <= 556) && (max2 >= 274 && max2 <= 278)) ||
+        ((max2 >= 552 && max2 <= 556) && (max1 >= 274 && max1 <= 278)) )
+        note = @"C#2";
+    else if ( ((max1 >= 584 && max1 <= 588) && (max2 >= 291 && max2 <= 295)) ||
+        ((max2 >= 584 && max2 <= 588) && (max1 >= 291 && max1 <= 295)) )
+        note = @"A2";/*
     else if (frequency >= 146.83 && frequency < 155.56)
-        note = @"D3";
+        note = @"D3";*/
     else
-        note = @"Note is above threshold";
+        note = @"Not yet recognized";
     
     return note;
 
